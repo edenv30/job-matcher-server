@@ -28,4 +28,3 @@ start the server :)
 - 'pip' is not recognized as an internal or external command,
 operable program or batch file.
 <a href="https://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command">https://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command</a>
-
