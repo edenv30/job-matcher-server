@@ -29,7 +29,7 @@ class RegisterUserApi(Resource):
             user.set_password(payload.get('password'))
             user.save()
         except NotUniqueError as e:
-            return {}, u.HTTP_BAD_INPUT
+            return {'errors': ['Email address already in use']}, u.HTTP_BAD_INPUT
 
         # user_schema = UserSchema(exclude=['password_hash'])
         # response = user_schema.dump(user).data
