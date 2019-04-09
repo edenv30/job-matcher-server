@@ -5,7 +5,7 @@ run the <b>Bolded commands</b> in terminal
 
 Python Installations
 1) Install <a href="https://www.python.org/">Python3</a>
-2) install virtual environment => <b>pip3 install virtualenv</b>
+2) install <a href="https://virtualenv.pypa.io/en/stable/installation/">virtual environment</a> => <b>pip3 install virtualenv</b>
 
 Clone the repository
 
@@ -23,3 +23,9 @@ Setup Python dev server configuration to PyCharm
 6) Working directory => X:\path\to\project\server\project_name\server (C:\Users\Tal\PycharmProjects\server\jobmatcher\server)
 
 start the server :)
+
+<h4>Troubleshooting</h4>
+- 'pip' is not recognized as an internal or external command,
+operable program or batch file.
+<a href="https://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command">https://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command</a>
+
