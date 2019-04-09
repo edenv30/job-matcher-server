@@ -5,7 +5,7 @@ run the <b>Bolded commands</b> in terminal
 
 Python Installations
 1) Install <a href="https://www.python.org/">Python3</a>
-2) install <a href="https://virtualenv.pypa.io/en/stable/installation/">virtual environment</a> => <b>pip3 install virtualenv</b>
+2) install <a href="https://virtualenv.pypa.io/en/stable/installation/">virtual environment</a> => <b>pip3 install virtualenv</b> OR <b>pip install virtualenv</b>
 
 Clone the repository
 
