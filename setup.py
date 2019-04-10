@@ -17,6 +17,8 @@ setup(
         "flask_mongoengine",
         "marshmallow",
         "marshmallow-mongoengine",
-        "flask-mail"
+        "flask-mail",
+        "bs4",
+        "googletrans"
     ]
 )
