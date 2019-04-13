@@ -19,6 +19,8 @@ setup(
         "marshmallow-mongoengine",
         "flask-mail",
         "bs4",
-        "googletrans"
+        "googletrans",
+        "nltk",  # to check if not work -> delete
+        "singledispatch"   # to check if not work -> delete
     ]
 )

@@ -10,7 +10,7 @@ class Job(me.Document):
     salary = me.StringField()   #default in mongoengine fields are not required
     description = me.StringField(required=True)  # to check mabye to change to list
     requirements = me.StringField(required=True) # to check mabye to change to list
-
+    link = me.StringField()
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
         document.update_date = datetime.datetime.now()

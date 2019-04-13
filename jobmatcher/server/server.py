@@ -11,6 +11,8 @@ from jobmatcher.config import config
 from jobmatcher.server.modules.init_apis import init_apis
 from jobmatcher.server.modules.job import scrapUrl
 
+from jobmatcher.server.utils.nltk import test
+
 app = Flask(__name__)
 CORS(app)
 
@@ -54,5 +56,6 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
-    #scrapUrl.scarpUrl()
+    scrapUrl.scarpUrl()
+    #test.test()
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
