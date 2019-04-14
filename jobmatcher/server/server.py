@@ -56,6 +56,6 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
-    scrapUrl.scarpUrl()
+    #scrapUrl.scarpUrl()
     #test.test()
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

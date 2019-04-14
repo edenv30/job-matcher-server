@@ -96,3 +96,7 @@ class UserUploadApi(Resource):
         user.cvs.append(cv.to_dbref())
         user.save()
         return {}, u.HTTP_CREATED
+
+class UserUpdateProfileAPi(Resource):
+    def put(self):
+        print('~~~~~ UserUpdateProfile:put function: ~~~~~')
