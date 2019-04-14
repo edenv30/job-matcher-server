@@ -20,7 +20,7 @@ setup(
         "flask-mail",
         "bs4",
         "googletrans",
-        "nltk",  # to check if not work -> delete
-        "singledispatch"   # to check if not work -> delete
+        "nltk",
+        "singledispatch"
     ]
 )

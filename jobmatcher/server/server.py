@@ -11,6 +11,8 @@ from jobmatcher.config import config
 from jobmatcher.server.modules.init_apis import init_apis
 from jobmatcher.server.modules.job import scrapUrl
 
+from jobmatcher.server.utils.nltk.nltk import test
+
 from jobmatcher.server.utils.nltk import test
 
 app = Flask(__name__)
@@ -58,4 +60,7 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
     #scrapUrl.scarpUrl()
     #test.test()
+    # adding new jobs from the web
+    #scrapUrl.scarpUrl()
+    #test()
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
