@@ -29,6 +29,7 @@ class UploadJobApi(Resource):
             response[i]["salary"] = job.salary
             response[i]["description"] = job.description
             response[i]["requirements"] = job.requirements
+            response[i]["link"] = job.link
             i += 1
         return response, u.HTTP_CREATED
 

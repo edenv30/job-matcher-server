@@ -13,6 +13,8 @@ from jobmatcher.server.modules.job import scrapUrl
 
 from jobmatcher.server.utils.nltk.nltk import test
 
+from jobmatcher.server.utils.nltk import test
+
 app = Flask(__name__)
 CORS(app)
 
