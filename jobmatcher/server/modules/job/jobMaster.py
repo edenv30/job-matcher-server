@@ -18,10 +18,12 @@ def web_scrap(urlJob):
         id = job.attrs['id']
         if id not in listId:
             jName = translateH2E(job.find(class_='CardHeader').get_text())
-            jLocation = []
-            jLocation.append(translateH2E(job.find(class_='jobLocation').get_text()))
-            jType = []
-            jType.append(translateH2E(job.find(class_='jobType').get_text()))
+            #jLocation = []
+            #jLocation.append(translateH2E(job.find(class_='jobLocation').get_text()))
+            jLocation=translateH2E(job.find(class_='jobLocation').get_text())
+            #jType = []
+            #jType.append(translateH2E(job.find(class_='jobType').get_text()))
+            jType=translateH2E(job.find(class_='jobType').get_text())
             # jLink
             link = job.find('span').get('onclick')
             if link is not None:

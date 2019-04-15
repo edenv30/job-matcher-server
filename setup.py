@@ -21,6 +21,9 @@ setup(
         "bs4",
         "googletrans",
         "nltk",
-        "singledispatch"
+        "singledispatch",
+        "numpy",
+        "spacy",
+        "pandas"
     ]
 )
