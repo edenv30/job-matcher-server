@@ -19,6 +19,10 @@ setup(
         "marshmallow-mongoengine",
         "flask-mail",
         "bs4",
-        "googletrans"
+        "googletrans",
+        "nltk",
+        "singledispatch",
+        "spacy",
+        "pandas"
     ]
 )
