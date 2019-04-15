@@ -15,6 +15,9 @@ from jobmatcher.server.utils.nltk.nltk import test
 
 from jobmatcher.server.utils.nltk import test
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -52,6 +55,27 @@ def ping():
 
 
 init_apis(api)
+
+
+def scrape_schedule():
+    """
+    this function will run in a loop in a set interval
+    (defined below inside scheduler.add_job)
+
+    activates scraping function to fetch new jobs information and save it to local DB
+    :return:
+    """
+
+    # scrapUrl.scarpUrl()
+    print('schedule')
+
+
+# https://apscheduler.readthedocs.io/en/latest/
+scheduler = BackgroundScheduler()
+# possible interval values:
+# https://apscheduler.readthedocs.io/en/latest/modules/triggers/interval.html
+scheduler.add_job(scrape_schedule, trigger='interval', hours=1)
+scheduler.start()
 
 if __name__ == '__main__':
     start_message = 'Job Matcher Server is Running'

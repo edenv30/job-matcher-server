@@ -10,6 +10,7 @@ setup(
     install_requires=[
         "flask",
         "flask_cors",
+        "flask_restful",
         "pyjwt",
         "jsonify",
         "flask_httpauth",
@@ -22,6 +23,7 @@ setup(
         "nltk",
         "singledispatch",
         "spacy",
-        "pandas"
+        "pandas",
+        "APScheduler==3.3.1"
     ]
 )
