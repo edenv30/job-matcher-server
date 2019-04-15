@@ -51,7 +51,6 @@ class SignUserApi(Resource):
             print(user.email)
             self.find_by_email("test@email.com")
 
-
 class UserApi(Resource):
     @require_authentication
     def put(self, user_id):
@@ -86,6 +85,35 @@ class UserUploadApi(Resource):
         user.save()
         return {}, u.HTTP_CREATED
 
+class UserUpdateApi(Resource):
+
+    def post(self, user_id):
+        print('------ post update profile ------')
+        payload = request.json.get('body')
+        # print(payload)
+        user = User(
+            first_name=payload.get('first_name'),
+            last_name=payload.get('last_name'),
+            email=payload.get('email').lower(),
+            active=True,
+            tags=payload.get('tags')
+        )
+        user.set_password(payload.get('password'))
+        ppost = User.objects.get(email=payload.get('email', None))
+        ppost.first_name=user.first_name
+        ppost.last_name = user.last_name
+        ppost.password_hash = user.password_hash
+        ppost.active = user.active
+        ppost.tags=user.tags
+        print(ppost.tags)
+        ppost.save()
+
+    def get (self,user_id):
+        print('------ get update profile ------')
+        # print(user_id)
+        user=User.objects.get(id=user_id)
+        # print (user.first_name)
+        return [user.first_name,user.last_name,user.email,user.tags,user.password_hash]
 
 class UserPreferencesApi(Resource):
     @require_authentication
