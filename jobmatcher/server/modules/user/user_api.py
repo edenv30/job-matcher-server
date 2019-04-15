@@ -40,20 +40,7 @@ class RegisterUserApi(Resource):
 
 
 class SignUserApi(Resource):
-
-    # def find_by_email(self, email):
-    #     connect('job_matcher', port=27017)
-    #     print("_find_by_email_function")
-    #     result = list(User.objects(email= email))
-    #     print(result[0].first_name)
-    #     result[0].password_hash
-    #     convertPassword = check_password(result[0].password_hash)
-
-    # /users
-    # /user/76776 =====> PUT
-
     def post(self):
-        # connect('job_matcher', port=27017)
         payload = request.json
         user = User.objects.get(email=payload.get('email', None))
         print("SUCCESS!!!!!!!!!")
@@ -98,3 +85,24 @@ class UserUploadApi(Resource):
         user.cvs.append(cv.to_dbref())
         user.save()
         return {}, u.HTTP_CREATED
+
+
+class UserPreferencesApi(Resource):
+    @require_authentication
+    def post(self,user_id):
+        # changes needed: adding assert, adding try&except,user will be able to load only 1 CV file
+        # taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+        print("UserPreferencesApi")
+        print(user_id)
+        payload = request.json.get('body')
+        kind = payload.get('type')
+        print(kind)
+
+        user = User.objects.get(pk=user_id)
+        print("#### " + user.email)
+        user.job_type = kind
+        print(user.job_type)
+        user.save()
+
+
+
