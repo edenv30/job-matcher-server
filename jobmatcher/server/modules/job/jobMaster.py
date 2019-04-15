@@ -2,9 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 #from jobmatcher.server.modules.job.Job import Job
 from.job import Job
-
 from googletrans import Translator
-
+import re   # Regular expression operations
 
 def web_scrap(urlJob):
     # urlJob = 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en'
@@ -17,19 +16,22 @@ def web_scrap(urlJob):
 
     for job in jobs:
         id = job.attrs['id']
-        if id in listId:
-            print('job exist in job collection = True id:' + id)
-        else:
+        if id not in listId:
             jName = translateH2E(job.find(class_='CardHeader').get_text())
             jLocation = []
             jLocation.append(translateH2E(job.find(class_='jobLocation').get_text()))
             jType = []
             jType.append(translateH2E(job.find(class_='jobType').get_text()))
             # jLink
+            link = job.find('span').get('onclick')
+            if link is not None:
+                num = int(re.search(r'\d+', link).group())
+                jlinkPopUp = 'https://www.jobmaster.co.il/jobs/checknum.asp?flagShare=' + str(num) + '&lang=en'
+            else:
+                jlinkPopUp = 'No contact - no link'
             jSalary = translateH2E(job.find(class_='jobSalary').get_text())
             # JDR job D - description R - requirements
             temp = job.find_all(class_='JobItemSubHeader')  # for checkin if Description or Requirements
-            # print(temp)
             jDR = []
             jdrRigth = job.findAll('div', {'style': 'text-align:right'})
             jdrLeft = job.findAll('div', {'style': 'text-align:left'})
@@ -57,10 +59,11 @@ def web_scrap(urlJob):
                 type=jType,
                 salary=jSalary,
                 description=des,
-                requirements=req
+                requirements=req,
+                link=jlinkPopUp
             )
             jobMongo.save()
-            # jExperience(skills,seniority)
+            #jExperience(skills,seniority)   - nltk !
 
 #check if job exist in the data base
 def check_exist_id():
@@ -74,4 +77,3 @@ def translateH2E(str):
     translator = Translator()
     res = translator.translate(str, dest='en').text
     return res
-

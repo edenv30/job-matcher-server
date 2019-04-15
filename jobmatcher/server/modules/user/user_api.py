@@ -84,6 +84,8 @@ class UserUploadApi(Resource):
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
         payload = request.json
+
+
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
         cv = CV(

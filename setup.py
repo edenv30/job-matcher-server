@@ -10,7 +10,6 @@ setup(
     install_requires=[
         "flask",
         "flask_cors",
-        "flask_restful",
         "pyjwt",
         "jsonify",
         "flask_httpauth",
