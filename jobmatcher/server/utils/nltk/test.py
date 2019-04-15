@@ -15,19 +15,19 @@ def test():
     s = nltk.pos_tag(nltk.word_tokenize(lang))
     print(s)
 
-    # sentence = "At eight o'clock on Thursday morning Arthur didn't feel very good brooklyn dimona."
-    # # Tokenize the text
-    # tokens = nltk.word_tokenize(sentence)
-    # print(tokens)
-    # # Tag the text
-    # tagged = nltk.pos_tag(tokens)
-    # print(tagged)
-    # # Identify named entities
-    # entities = nltk.chunk.ne_chunk(tagged)
-    # print(entities)
+    sentence = "At eight o'clock on Thursday morning Arthur didn't feel very good brooklyn dimona israel ."
+    # Tokenize the text
+    tokens = nltk.word_tokenize(sentence)
+    print(tokens)
+    # Tag the text
+    tagged = nltk.pos_tag(tokens)
+    print(tagged)
+    # Identify named entities
+    entities = nltk.chunk.ne_chunk(tagged)
+    print(entities)
     # Display a parse tree:
-    # t = treebank.parsed_sents('wsj_0001.mrg')[0]
-    # t.draw()
+    t = treebank.parsed_sents('wsj_0001.mrg')[0]
+    t.draw()
     # text = nltk.pos_tag(nltk.word_tokenize("And now for something completely different"))
     # print(text)
     # # print(nltk.corpus.brown.words())
