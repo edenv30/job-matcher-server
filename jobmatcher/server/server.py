@@ -48,7 +48,6 @@ mail = Mail(app)
 # init flask rest Api
 api = Api(app)
 
-
 @app.route('/api/ping')
 def ping():
     return 'Pong: %s' % (time.strftime('%c')), u.HTTP_OK
