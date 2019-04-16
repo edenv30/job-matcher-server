@@ -27,7 +27,8 @@ def extract_skills(resume_text):
           if token.lower() in skills:
             print('-----------------')
             print(token)
-            skillset.append(token.lower())
+            if token.lower() not in skillset:
+                skillset.append(token.lower())
 
      # check for bi-grams and tri-grams (example: machine learning)
      for token in noun_chunks:
