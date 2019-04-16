@@ -1,6 +1,7 @@
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
+nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 
 def extract_experience(resume_text):

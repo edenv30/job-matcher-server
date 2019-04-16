@@ -135,3 +135,8 @@ class UserPreferencesApi(Resource):
 
 
 
+class UserFindMatchApi(Resource):
+    @require_authentication
+    def post(self,user_id):
+        print(" === UserFindMatchApi ===")
+        print("user_id: " + user_id)
