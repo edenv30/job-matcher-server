@@ -51,6 +51,7 @@ class SignUserApi(Resource):
             print(user.email)
             self.find_by_email("test@email.com")
 
+
 class UserApi(Resource):
     @require_authentication
     def put(self, user_id):

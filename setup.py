@@ -10,6 +10,7 @@ setup(
     install_requires=[
         "flask",
         "flask_cors",
+        "flask_restful",
         "pyjwt",
         "jsonify",
         "flask_httpauth",
@@ -21,6 +22,7 @@ setup(
         "googletrans",
         "nltk",
         "singledispatch",
+        "numpy",
         "spacy",
         "pandas"
     ]
