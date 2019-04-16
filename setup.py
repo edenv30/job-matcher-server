@@ -24,6 +24,7 @@ setup(
         "singledispatch",
         "numpy",
         "spacy",
-        "pandas"
+        "pandas",
+        "APScheduler==3.3.1"
     ]
 )
