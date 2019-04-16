@@ -1,25 +1,15 @@
 import spacy
 from spacy.matcher import Matcher
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692
 # load pre-trained model
 nlp = spacy.load('en_core_web_sm')
 
 # initialize matcher with a vocab
 matcher = Matcher(nlp.vocab)
-<<<<<<< HEAD
 matcher2=Matcher(nlp.vocab)
-=======
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692
-
 
 def extract_name(resume_text):
     nlp_text = nlp(resume_text)
-<<<<<<< HEAD
 
     # First name and Last name are always Proper Nouns
     pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
@@ -30,7 +20,6 @@ def extract_name(resume_text):
 
     matches = matcher(nlp_text)
     matches2 = matcher2(nlp_text)
-=======
     for token in nlp_text:
         print('The token')
         #print(token.lemma_)
@@ -42,20 +31,16 @@ def extract_name(resume_text):
     matcher.add('NAME', None, pattern)
 
     matches = matcher(nlp_text)
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692
 
     for match_id, start, end in matches:
         span = nlp_text[start:end]
         print(span.text)
-<<<<<<< HEAD
 
     for match_id, start, end in matches2:
         span = nlp_text[start:end]
         print(span.text)
     return
 
-=======
-    return span.text
 
 # import spacy
 #
@@ -97,4 +82,3 @@ def extract_name(resume_text):
 #         string_id = nlp.vocab.strings[match_id]  # Get string representation
 #         span = doc[start:end]  # The matched span
 #         print(match_id, string_id, start, end, span.text)
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692

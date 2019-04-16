@@ -10,14 +10,8 @@ from jobmatcher.server.utils import utils as u
 from jobmatcher.config import config
 from jobmatcher.server.modules.init_apis import init_apis
 from jobmatcher.server.modules.job import scrapUrl
-
-<<<<<<< HEAD
-from jobmatcher.server.utils.nltk import EducationExtract
-
-=======
 from jobmatcher.server.utils.nltk import nameExtract , skillsExtract ,educationExtract,experienceExtract
 from jobmatcher.server.utils.nltk import test
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692
 
 app = Flask(__name__)
 CORS(app)
@@ -65,12 +59,6 @@ if __name__ == '__main__':
     #job_nltk.take_collection()
     # adding new jobs from the web
     #scrapUrl.scarpUrl()
-<<<<<<< HEAD
-    #test()
-    EducationExtract.extract_experience('BE 2014 BTECH 2012 kjkj kjkj')
-    # nameExtract.extract_name(" I'm living in Israel. and  my name is Hanna Yair and i'm ten years old ")
-=======
-
     document_string = " Electronically signed by stupid: Dr. John Douglas, M.D.; Jun 13 2018 11:13AM CST"
     document_string = "John's My name is Eden Varsulker i am study Software engineer and living in Dimona i an student in SCE"
 
@@ -88,5 +76,4 @@ if __name__ == '__main__':
     # educationExtract.extract_education()
     experienceExtract.extract_experience(' of experience five years in c++')
     #test.test()
->>>>>>> 1500be1c88224c2710fd299a5d0cdd21ccff7692
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
