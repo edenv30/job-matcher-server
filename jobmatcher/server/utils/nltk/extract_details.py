@@ -16,7 +16,8 @@ EDUCATION = [
             'BE','B.E.', 'B.E', 'BS', 'B.S',
             'ME', 'M.E', 'M.E.', 'MS', 'M.S',
             'BTECH', 'B.TECH', 'M.TECH', 'MTECH',
-            'SSC', 'HSC', 'CBSE', 'ICSE', 'X', 'XII'
+            'SSC', 'HSC', 'CBSE', 'ICSE', 'X', 'XII',
+            'BACHELOR', 'OF SCIENCE', 'B.SC' , 'BSC'
             ]
 
 def extract_skills(resume_text):
@@ -31,8 +32,9 @@ def extract_skills(resume_text):
 
     # reading the csv file
 
+    # C:\Users\Tal\PycharmProjects\server\jobmatcher\server\utils\nltk
     data = pd.read_csv(
-        'C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+        'C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
     # extract values
     skills = list(data.columns.values)
     skillset = []
@@ -71,12 +73,17 @@ def extract_education(resume_text):
             tex = re.sub(r'[?|$|.|!|,]', r'', tex)
             if tex.upper() in EDUCATION and tex not in STOPWORDS:
                 #print('-----------> ' + edu[tex])
-                edu[tex] = text + nlp_text[index]
+                if tex == 'Bachelor':
+                    tex = 'B.S'
+                    edu[tex] = text + nlp_text[index]
+                else:
+                    edu[tex] = text + nlp_text[index]
 
     # to check for job maybe to delete only for job !!! - eden!
     # Extract year
     education = []
     for key in edu.keys():
+
         year = re.search(re.compile(r'(((20|19)(\d{2})))'), edu[key])
         if year:
             education.append((key, ''.join(year[0])))
