@@ -22,6 +22,7 @@ setup(
         "googletrans",
         "nltk",
         "singledispatch",
+        "numpy",
         "spacy",
         "pandas",
         "APScheduler==3.3.1"
