@@ -27,7 +27,7 @@ def web_scrap(urlJob):
             # jLink
             link = job.find('span').get('onclick')
             if link is not None:
-                num = int(re.search(r'\d+', link).group())
+                num = int(re.search(r'\d+', link).group())   # extract number from string with regular exp
                 jlinkPopUp = 'https://www.jobmaster.co.il/jobs/checknum.asp?flagShare=' + str(num) + '&lang=en'
             else:
                 jlinkPopUp = 'No contact - no link'

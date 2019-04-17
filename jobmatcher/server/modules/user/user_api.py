@@ -13,6 +13,12 @@ from jobmatcher.server.utils import utils as u
 from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
 
+# import all nltk - extract fields functions
+from jobmatcher.server.utils.nltk.extract_details import extract_education
+from jobmatcher.server.utils.nltk.extract_details import extract_experience
+from jobmatcher.server.utils.nltk.extract_details import extract_skills
+
+
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -135,3 +141,30 @@ class UserPreferencesApi(Resource):
 
 
 
+class UserFindMatchApi(Resource):
+    @require_authentication
+    def post(self,user_id):
+        print(" === UserFindMatchApi ===")
+        print("user_id: " + user_id)
+
+        # here we are going to return all matched results we found
+        # skills = []
+        # education = []
+        # experience = []
+
+        #user = User.objects.get(email=payload.get('email', None))
+        user = User.objects.get(pk=user_id)
+        # mail = user.email
+        # print("user.email: " + mail)
+        resume = user.cvs[0].text
+        # print("Resume: ")
+        # print(resume)
+        skills = extract_skills(resume)
+        education = extract_education(resume)
+        experience = extract_experience(resume)
+        print("******** RESULTS SKILLS ***********")
+        print(skills)
+        print("******** RESULTS EDUCATION ***********")
+        print(education)
+        print("******** RESULTS EXPERIENCE ***********")
+        print(experience)
