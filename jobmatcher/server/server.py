@@ -63,17 +63,17 @@ if __name__ == '__main__':
     document_string = "John's My name is Eden Varsulker i am study Software engineer and living in Dimona i an student in SCE"
 
     #nameExtract.extract_name(document_string)
-    # skillsExtract.extract_skills('DBA SQL is a leading company in the field of '
-    #                              'Internet systems development. '
-    #                              'In the role of SQL Server programming versions 2008 and later. '
-    #                              'Full time work Sunday through Thursday between 9-18 hours without overtime / '
-    #                              'no shifts !! Work in the central region')
+    skillsExtract.extract_skills('Sr. Specialist, IT Administration'
+                                 'T-Mobile USA beer sheeva!, USA'
+                                 'T-Mobile USA Inc is the third largest Telecommunications company in the United States that '
+                                 'employees over 51,000 across the arad. I live in tel-aviv retail environment.'
+                                 'Supported 15 plus retail stores with their computer equipment issues. Remotely or traveled to site. Throughout my tenure at T-Mobile I was always getting customer and team recognition for achievements and excellent service. Some of the projects I have worked on...')
     # skillsExtract.extract_skills('B.Sc. in computer science or SW computer engineer  '
     #                              'Experience in OOD / OOP and development in C++ over Linux.Real Time and multitasking programming.'
     #                              'High SW engineering standards')
     # ed = '5+ years as a Product Manager in web/client environment and enterprise B2BExperience with for elegant B.E. 2013'
     # ed2 = ''
     # educationExtract.extract_education()
-    experienceExtract.extract_experience(' of experience five years in c++')
+    #experienceExtract.extract_experience(' of experience five years in c++')
     #test.test()
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
