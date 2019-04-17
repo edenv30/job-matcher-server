@@ -5,8 +5,6 @@ from flask_cors import CORS
 from flask_restful import Api
 from flask_mail import Mail
 
-
-
 from jobmatcher.server.db import db
 from jobmatcher.server.utils import utils as u
 from jobmatcher.config import config
@@ -16,7 +14,7 @@ from jobmatcher.server.modules.job import scrapUrl
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from jobmatcher.server.utils.nltk import job_extract
-
+from jobmatcher.server.utils.SOS import location_stan , locationExtract, job_nltk
 app = Flask(__name__)
 CORS(app)
 
@@ -83,5 +81,8 @@ if __name__ == '__main__':
     #job_nltk.take_collection()
     # adding new jobs from the web
     #scrapUrl.scarpUrl()
-    print(job_extract.try_job())
+    #print(job_extract.try_job())
+    #location_stan.stan()
+    j = job_nltk.extract_location('Beer Sheva, Israel | M +972- 52-3281614| tolmamal@gmail.com')
+    print(j[1])
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

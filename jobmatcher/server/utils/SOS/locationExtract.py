@@ -2,7 +2,7 @@ from nltk import word_tokenize, pos_tag, ne_chunk
 from nltk import Tree
 
 def extract_location(text, label):
-    chunked = ne_chunk(pos_tag(word_tokenize(text)))
+    chunked = ne_chunk(pos_tag(word_tokenize(text)),binary=True)
     prev = None
     continuous_chunk = []
     current_chunk = []
@@ -19,3 +19,4 @@ def extract_location(text, label):
             continue
 
     return continuous_chunk
+

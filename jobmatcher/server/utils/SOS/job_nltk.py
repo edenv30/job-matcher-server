@@ -26,7 +26,7 @@ def extract_location(str):
     named_entities = []
 
     for t in parse_tree.subtrees():
-        if t.label() == 'NE':
+        if t.label() == 'NE' or t.label() == 'GPE' or t.label() == 'PERSON' or t.label() == 'ORGANIZATION':
             named_entities.append(t)
             # named_entities.append(list(t))  # if you want to save a list of tagged words instead of a tree
     # connect name entity to one
