@@ -14,6 +14,7 @@ from jobmatcher.server.modules.init_apis import init_apis
 from jobmatcher.server.modules.job import scrapUrl
 from apscheduler.schedulers.background import BackgroundScheduler
 
+from jobmatcher.server.utils.SOS import locationExtract
 from jobmatcher.server.utils.nltk import job_extract
 
 app = Flask(__name__)
@@ -82,5 +83,6 @@ if __name__ == '__main__':
     #job_nltk.take_collection()
     # adding new jobs from the web
     #scrapUrl.scarpUrl()
-    print(job_extract.try_job())
+    # print(job_extract.try_job())
+    locationExtract.extract_location()
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
