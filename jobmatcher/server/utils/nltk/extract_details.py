@@ -33,8 +33,8 @@ def extract_skills(resume_text):
     # reading the csv file
 
     # C:\Users\Tal\PycharmProjects\server\jobmatcher\server\utils\nltk
-    data = pd.read_csv(
-        'C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+    # C:\Users\eden\PycharmProjects\server\job-matcher-server\jobmatcher\server\utils\nltk\skills.csv
+    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
     # extract values
     skills = list(data.columns.values)
     skillset = []

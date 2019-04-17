@@ -11,8 +11,8 @@ def take_collection():
         #print(loc[0], loc[1]) 0 - tree 1 - list
         print('location list: ')
         print(loc[1])
-        print('tree location: ')
-        print(loc[0])
+        # print('tree location: ')
+        # print(loc[0])
         #typej=extract_type(j["type"])
         #print(typej)
 

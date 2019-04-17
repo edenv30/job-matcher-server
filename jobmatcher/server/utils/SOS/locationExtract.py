@@ -1,22 +1,36 @@
-from nltk import word_tokenize, pos_tag, ne_chunk
-from nltk import Tree
+from nltk.tag import StanfordNERTagger
+from nltk.tokenize import word_tokenize
+import pandas as pd
 
-def extract_location(text, label):
-    chunked = ne_chunk(pos_tag(word_tokenize(text)),binary=True)
-    prev = None
-    continuous_chunk = []
-    current_chunk = []
+import os
+java_path = "C:/Program Files/Java/jdk1.8.0_191/bin/java.exe"
+os.environ['JAVAHOME'] = java_path
+def extract_location():
+    st = StanfordNERTagger('C:/Users/eden/Desktop/stanford-ner-2018-10-16/classifiers/english.all.3class.distsim.crf.ser.gz',
+                           'C:/Users/eden/Desktop/stanford-ner-2018-10-16/stanford-ner.jar')
 
-    for subtree in chunked:
-        if type(subtree) == Tree and subtree.label() == label:
-            current_chunk.append(" ".join([token for token, pos in subtree.leaves()]))
-        elif current_chunk:
-            named_entity = " ".join(current_chunk)
-            if named_entity not in continuous_chunk:
-                continuous_chunk.append(named_entity)
-                current_chunk = []
+    # text = 'While in France, Christine Lagarde discussed short-term stimulus efforts in a recent interview with the Wall Street Journal.'
+    loc = 'Details:' \
+          'Full name: Israel Aviv .' \
+          'Address: Hazait 54, Givat-Shmuel .' \
+          'Mobile: 050-4344936 .' \
+          'Email: chenyair1617@gmail.com .' \
+          'ID: 316178748 .'
+    tokenized_text = word_tokenize(loc)
+    classified_text = st.tag(tokenized_text)
+    data = pd.read_csv(
+        'C:\\Users\\Eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
+    # extract values
+    location = list(data.columns.values)
+    arr=[]
+    for token in classified_text:
+        if (token[1]=='LOCATION')and not(token[0]=='Israel'):
+            arr.append(token[0])
         else:
-            continue
-
-    return continuous_chunk
+            if token[0].lower() in location:
+                # print('-----------------')
+                # print(token)
+                if token[0].lower() not in arr:
+                    arr.append(token[0].lower())
+    print(arr)
 
