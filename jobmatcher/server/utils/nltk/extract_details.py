@@ -1,5 +1,4 @@
 import pandas as pd
-import spacy
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -11,9 +10,12 @@ import os
 # java_path = "C:/Program Files/Java/jdk1.8.0_191/bin/java.exe"
 # os.environ['JAVAHOME'] = java_path
 import nltk
+from fuzzywuzzy import fuzz
+import spacy
+from difflib import SequenceMatcher
+
 nltk.download('stopwords')
 nltk.download('wordnet')
-
 nlp = spacy.load("en_core_web_sm")  # load the English model - load pre-trained model
 
 STOPWORDS = set(stopwords.words('english'))
@@ -88,9 +90,10 @@ def extract_skills(resume_text):
 
     # reading the csv file
 
-    # C:\Users\Tal\PycharmProjects\server\jobmatcher\server\utils\nltk
+
+    # for Tal : C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk
     # C:\Users\eden\PycharmProjects\server\job-matcher-server\jobmatcher\server\utils\nltk\skills.csv
-    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk')
     # extract values
     skills = list(data.columns.values)
     skillset = []
@@ -135,7 +138,7 @@ def extract_education(resume_text):
                 else:
                     edu[tex] = text + nlp_text[index]
 
-    # to check for job maybe to delete only for job !!! - eden!
+    # TODO: to check for job maybe to delete only for job !!! - eden!
     # Extract year
     education = []
     for key in edu.keys():
@@ -190,3 +193,62 @@ def extract_experience(resume_text):
 
     #print(x)
     return x
+
+def partial_ratio(s1, s2):
+    """
+    Return the ratio of the most similar substring
+    as a number between 0 and 100.
+    """
+
+    if len(s1) <= len(s2):
+        shorter = s1
+        longer = s2
+    else:
+        shorter = s2
+        longer = s1
+
+    m = SequenceMatcher(None, shorter, longer, autojunk=False)
+    blocks = m.get_matching_blocks()
+
+    # each block represents a sequence of matching characters in a string
+    # of the form (idx_1, idx_2, len)
+    # the best partial match will block align with at least one of those blocks
+    #   e.g. shorter = "abcd", longer = XXXbcdeEEE
+    #   block = (1,3,3)
+    #   best score === ratio("abcd", "Xbcd")
+    scores = []
+    for (short_start, long_start, _) in blocks:
+        long_end = long_start + len(shorter)
+        long_substr = longer[long_start:long_end]
+
+        m2 = SequenceMatcher(None, shorter, long_substr, autojunk=False)
+        r = m2.ratio()
+        if r > .995:
+            return 100
+        else:
+            scores.append(r)
+
+    return max(scores) * 100.0
+
+def extract_location(resume_text, match_threshold=90):
+    """
+    extract locations using fuzzy string matching
+    :param resume_text:
+    :param match_threshold:
+    :return:
+    """
+    location_matches = []
+    # load the locations2 csv file (will be used as the source of comparison)
+    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv')
+    locations = list(data.columns.values)
+    resume_text = resume_text.lower()
+    for location in locations:
+
+        # iterate on all the locations from the csv file and consider the ones above a given threshold as a match
+        # ratio = partial_ratio(location.lower(), resume_text)
+        # ratio = fuzz.partial_ratio(location.lower(), resume_text)
+        ratio = fuzz.token_set_ratio(location.lower(), resume_text)
+        if ratio >= match_threshold:
+            location_matches.append(location)
+    return location_matches
+

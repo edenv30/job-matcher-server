@@ -20,3 +20,23 @@ def scarpUrl():
         web_scrap(urlList[i])
 
     print(urlList)
+
+
+def scrape_cities():
+    # scrape cities and save into locations.csv
+    url = "http://en.netzah.org/"
+    import requests
+    response = requests.get(url)  # to check for the other pages (checking only the first page) -> to change the URL
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    locations = []
+    for link in soup.find_all('a'):
+        location = link.text
+        if location and str(location) and len(str(location)):
+            locations.append(location)
+
+    import csv
+    with open('locations.csv', 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',')
+        spamwriter.writerow(locations)

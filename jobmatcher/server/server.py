@@ -15,8 +15,8 @@ from jobmatcher.server.modules.job import scrapUrl
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from jobmatcher.server.utils.nltk import extract_details
-#from jobmatcher.server.utils.word2vec import example
+from jobmatcher.server.utils.SOS import locationExtract , job_nltk
+from jobmatcher.server.utils.nltk import job_extract, extract_details
 
 app = Flask(__name__)
 CORS(app)
@@ -82,4 +82,6 @@ if __name__ == '__main__':
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
+    result = extract_details.extract_location("Tel Aviv C++ Python ")
+    print(result)
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
