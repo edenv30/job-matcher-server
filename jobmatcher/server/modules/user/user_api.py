@@ -17,6 +17,7 @@ from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.utils.nltk.extract_details import extract_education
 from jobmatcher.server.utils.nltk.extract_details import extract_experience
 from jobmatcher.server.utils.nltk.extract_details import extract_skills
+from jobmatcher.server.utils.nltk.extract_details import extract_location
 
 
 
@@ -143,7 +144,7 @@ class UserPreferencesApi(Resource):
 
 class UserFindMatchApi(Resource):
     @require_authentication
-    def post(self,user_id):
+    def post(self, user_id):
         print(" === UserFindMatchApi ===")
         print("user_id: " + user_id)
 
@@ -159,6 +160,8 @@ class UserFindMatchApi(Resource):
         resume = user.cvs[0].text
         # print("Resume: ")
         # print(resume)
+
+        locations = extract_location(resume)
         skills = extract_skills(resume)
         education = extract_education(resume)
         experience = extract_experience(resume)
@@ -168,3 +171,5 @@ class UserFindMatchApi(Resource):
         print(education)
         print("******** RESULTS EXPERIENCE ***********")
         print(experience)
+        print("******** RESULTS LOCATION ***********")
+        print(list(locations))
