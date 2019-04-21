@@ -16,7 +16,7 @@ from jobmatcher.server.modules.job import scrapUrl
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from jobmatcher.server.utils.SOS import locationExtract , job_nltk
-from jobmatcher.server.utils.nltk import job_extract
+from jobmatcher.server.utils.nltk import job_extract, extract_details
 
 app = Flask(__name__)
 CORS(app)
@@ -81,16 +81,7 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
-    #job_nltk.take_collection()
-    # adding new jobs from the web
-    #scrapUrl.scarpUrl()
-    # print(job_extract.try_job())
-    #location_stan.stan()
-    # j = job_nltk.extract_location('Beer Sheva, Israel | M +972- 52-3281614| tolmamal@gmail.com')
-    # print(j[1])
-    print('location from job collection')
-    job_nltk.take_collection()
-    # print(job_extract.try_job())
-    print('locaion from cv')
-    locationExtract.extract_location()
+
+    result = extract_details.extract_location("Tel Aviv C++ Python ")
+    print(result)
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

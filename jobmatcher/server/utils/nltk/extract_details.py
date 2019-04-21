@@ -34,9 +34,10 @@ def extract_skills(resume_text):
 
     # reading the csv file
 
-    # C:\Users\Tal\PycharmProjects\server\jobmatcher\server\utils\nltk
+
+    # for Tal : C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk
     # C:\Users\eden\PycharmProjects\server\job-matcher-server\jobmatcher\server\utils\nltk\skills.csv
-    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk')
     # extract values
     skills = list(data.columns.values)
     skillset = []
@@ -186,6 +187,7 @@ def extract_location(resume_text, match_threshold=90):
     locations = list(data.columns.values)
     resume_text = resume_text.lower()
     for location in locations:
+
         # iterate on all the locations from the csv file and consider the ones above a given threshold as a match
         # ratio = partial_ratio(location.lower(), resume_text)
         # ratio = fuzz.partial_ratio(location.lower(), resume_text)
