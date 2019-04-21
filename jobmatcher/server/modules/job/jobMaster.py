@@ -72,6 +72,7 @@ def check_exist_id():
     listID = []
     for job in Job.objects:
         listID.append(job['identifier'])
+    print(listID)
     return listID
 
 #translate from hebrew to english

@@ -2,29 +2,30 @@ from jobmatcher.server.utils.nltk import extract_details
 from jobmatcher.server.modules.job.job import Job
 
 def try_job():
-    # skills ='DBA SQL is a leading company in the field of Internet systems development ' \
-    #         'In the role of SQL Server programming versions 2008 and later. '\
-    #         'Full time work Sunday through Thursday between 9-18 hours without overtime / ' \
-    #         'no shifts !! Work in the central region'
-    # print(extract_details.extract_skills(skills))
-    # education = '5+ years as a Product Manager in web/client environment and enterprise B2BExperience with for elegant B.E. 2013'
-    # print(extract_details.extract_education(education))
-    # experience = 'of experience five years in c++ and python'
-    # print(extract_details.extract_experience(experience))
     exteact_data = {}
+    location = {}
     skills = {}
     education = {}
     experience = {}
     jobs = Job.objects
     for j in jobs():
+        id = j['identifier']
+        location = get_location(j,location)
         skills = get_skills(j,skills)
         education = get_education(j,education)
         experience = get_experience(j,experience)
+    exteact_data['location'] = location
     exteact_data['skills'] = skills
     exteact_data['education'] = education
     exteact_data['experience'] = experience
     #print(exteact_data)
     return exteact_data
+
+def get_location(job,location):
+    loc = extract_details.extract_location(job['location'])
+    location[job['identifier']] = loc[1]
+    return location
+
 
 def get_skills(job,skills):
     sr = extract_details.extract_skills(job['requirements'])

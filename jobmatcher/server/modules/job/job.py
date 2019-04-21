@@ -3,7 +3,7 @@ import datetime
 
 
 class Job(me.Document):
-    identifier = me.StringField(unique=True,required=True)  # to change this mabye to the link attribute
+    identifier = me.StringField(required=True,unique=True)  # to change this mabye to the link attribute
     role_name = me.StringField(required=True)
     #location = me.ListField(me.StringField(),required=True)
     location = me.StringField(required=True)

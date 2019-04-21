@@ -25,3 +25,11 @@
 # locationExtract.test()
 # experienceExtract.extract_experience(' of experience five years in c++')
 # test.test()
+
+# 21.04.19
+# adding new jobs from the web
+# scrapUrl.scarpUrl()
+# print(job_extract.try_job())
+# #location_stan.stan()
+# print('locaion from cv')
+# extract_details.extract_location_cv()

@@ -3,6 +3,13 @@ import spacy
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.tree import Tree
+from nltk.tag import StanfordNERTagger
+from nltk.tokenize import word_tokenize
+import pandas as pd
+import os
+# java_path = "C:/Program Files/Java/jdk1.8.0_191/bin/java.exe"
+# os.environ['JAVAHOME'] = java_path
 import nltk
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -19,6 +26,55 @@ EDUCATION = [
             'SSC', 'HSC', 'CBSE', 'ICSE', 'X', 'XII',
             'BACHELOR', 'OF SCIENCE', 'B.SC' , 'BSC'
             ]
+#from job
+def extract_location_job(str):
+    #if have city, replace the comma to space
+    #str = re.sub(r'[?|$|.|!|,]', r'', str)
+    #str = str.replace(",", " , ")
+    #str = str.replace("-"," ")
+    #parse_tree = ne_chunk(pos_tag(str.split()), binary=True)  # POS tagging before chunking!
+    parse_tree = nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(str)), binary=True)  # POS tagging before chunking!
+
+    named_entities = []
+
+    for t in parse_tree.subtrees():
+        if t.label() == 'NE' or t.label() == 'GPE' or t.label() == 'PERSON' or t.label() == 'ORGANIZATION':
+            named_entities.append(t)
+            # named_entities.append(list(t))  # if you want to save a list of tagged words instead of a tree
+    # connect name entity to one
+    named_entities_str = [" ".join(w for w, t in elt) for elt in named_entities if isinstance(elt, Tree)]
+
+    return named_entities , named_entities_str
+
+#from cv
+# def extract_location_cv():
+#     st = StanfordNERTagger('C:/Users/eden/Desktop/stanford-ner-2018-10-16/classifiers/english.all.3class.distsim.crf.ser.gz',
+#                            'C:/Users/eden/Desktop/stanford-ner-2018-10-16/stanford-ner.jar')
+#
+#     # text = 'While in France, Christine Lagarde discussed short-term stimulus efforts in a recent interview with the Wall Street Journal.'
+#     loc = 'Details:' \
+#           'Full name: Israel Aviv .' \
+#           'Address: Hazait 54, Givat-Shmuel .' \
+#           'Mobile: 050-4344936 .' \
+#           'Email: chenyair1617@gmail.com .' \
+#           'ID: 316178748 .'
+#     tokenized_text = word_tokenize(loc)
+#     classified_text = st.tag(tokenized_text)
+#     data = pd.read_csv(
+#         'C:\\Users\\Eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
+#     # extract values
+#     location = list(data.columns.values)
+#     arr=[]
+#     for token in classified_text:
+#         if (token[1]=='LOCATION')and not(token[0]=='Israel'):
+#             arr.append(token[0])
+#         else:
+#             if token[0].lower() in location:
+#                 # print('-----------------')
+#                 # print(token)
+#                 if token[0].lower() not in arr:
+#                     arr.append(token[0].lower())
+#     print(arr)
 
 def extract_skills(resume_text):
     nlp_text = nlp(resume_text)

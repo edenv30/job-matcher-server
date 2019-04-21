@@ -1,7 +1,7 @@
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
 from jobmatcher.server.modules.job.job import Job
-
+import re
 
 #take attrs from job collection and extract with nltk
 def take_collection():
@@ -18,8 +18,9 @@ def take_collection():
 
 def extract_location(str):
     #if have city, replace the comma to space
-    str = str.replace(",", " , ")
-    str = str.replace("-"," ")
+    #str = re.sub(r'[?|$|.|!|,]', r'', str)
+    #str = str.replace(",", " , ")
+    #str = str.replace("-"," ")
     #parse_tree = ne_chunk(pos_tag(str.split()), binary=True)  # POS tagging before chunking!
     parse_tree = ne_chunk(pos_tag(word_tokenize(str)), binary=True)  # POS tagging before chunking!
 
