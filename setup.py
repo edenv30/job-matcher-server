@@ -25,7 +25,8 @@ setup(
         "numpy",
         "spacy",
         "pandas",
-        "APScheduler==3.3.1",
+        "APScheduler==3.3.1"
+,
         "geotext",
         "fuzzywuzzy",
         "fuzzysearch",
