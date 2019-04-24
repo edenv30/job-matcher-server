@@ -30,6 +30,11 @@ setup(
         "geotext",
         "fuzzywuzzy",
         "fuzzysearch",
-        "python-Levenshtein"
+        "python-Levenshtein",
+        "gensim",
+        "scipy",
+        "sklearn",
+        "pickle"
+
     ]
 )

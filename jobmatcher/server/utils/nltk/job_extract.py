@@ -23,7 +23,7 @@ def try_job():
 
 def get_location(job,location):
     loc = extract_details.extract_location(job['location'])
-    location[job['identifier']] = loc[1]
+    location[job['identifier']] = loc
     return location
 
 
