@@ -3,6 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="a21251ac-f55a-4914-ba25-988eb338af34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nltk/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nltk/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nltk/lib/ngram.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nltk/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/nltk/test/ngram.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate.xsh" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate.xsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/bundle_image" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/bundle_image" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,70 +19,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1981876271">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="21" />
-          <entry key="project.open.time.108" value="1" />
-          <entry key="project.open.time.112" value="1" />
-          <entry key="project.open.time.118" value="1" />
-          <entry key="project.open.time.121" value="1" />
-          <entry key="project.open.time.128" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.25" value="2" />
-          <entry key="project.open.time.27" value="1" />
-          <entry key="project.open.time.31" value="1" />
-          <entry key="project.open.time.39" value="1" />
-          <entry key="project.open.time.47" value="1" />
-          <entry key="project.open.time.50" value="1" />
-          <entry key="project.open.time.62" value="1" />
-          <entry key="project.open.time.69" value="1" />
-          <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.74" value="1" />
-          <entry key="project.open.time.8" value="2" />
-          <entry key="project.open.time.81" value="1" />
-          <entry key="project.open.time.91" value="1" />
-          <entry key="project.open.time.99" value="1" />
-          <entry key="project.opened" value="23" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="csv" value="10" />
-          <entry key="py" value="204" />
-          <entry key="text8" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSV" value="8" />
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="204" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="csv" value="43" />
-          <entry key="dummy" value="9" />
-          <entry key="py" value="11934" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CSV" value="33" />
-          <entry key="PLAIN_TEXT" value="19" />
-          <entry key="Python" value="11934" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="481">
               <caret line="90" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -83,13 +34,62 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/activate">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-385">
+              <caret line="42" column="153" selection-start-line="42" selection-start-column="153" selection-end-line="42" selection-end-column="153" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.bat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-223">
+              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.ps1">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-875" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.xsh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/activate_this.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-525" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/venv/Scripts/bundle_image">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
+            <state relative-caret-position="2775">
+              <caret line="112" selection-start-line="112" selection-end-line="112" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
-                <marker date="1556113540334" expanded="true" signature="2378:2550" ph="..." />
               </folding>
             </state>
           </provider>
@@ -170,6 +170,11 @@
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/word2vec/try_eden.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/server.py" />
+        <option value="$PROJECT_DIR$/venv/Scripts/activate" />
+        <option value="$PROJECT_DIR$/venv/Scripts/activate.bat" />
+        <option value="$PROJECT_DIR$/venv/Scripts/activate.xsh" />
+        <option value="$PROJECT_DIR$/venv/Scripts/bundle_image" />
+        <option value="$PROJECT_DIR$/venv/Scripts/asadmin" />
       </list>
     </option>
   </component>
@@ -184,7 +189,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -206,38 +210,25 @@
             <path>
               <item name="job-matcher-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="job-matcher-server" type="462c0819:PsiDirectoryNode" />
-              <item name="jobmatcher" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-matcher-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="job-matcher-server" type="462c0819:PsiDirectoryNode" />
-              <item name="jobmatcher" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="job-matcher-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="job-matcher-server" type="462c0819:PsiDirectoryNode" />
-              <item name="jobmatcher" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="word2vec" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="job-matcher-server" type="b2602c69:ProjectViewProjectNode" />
               <item name="job-matcher-server" type="462c0819:PsiDirectoryNode" />
               <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="widgets.py&#9;FILE&#9;file://C:/Users/eden/PycharmProjects/server/job-matcher-server/venv/Lib/site-packages/flask_wtf/recaptcha/widgets.py" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/jobmatcher/server/server.py" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -273,6 +264,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/jobmatcher/server/server.py" />
       <option name="PARAMETERS" value="--mode=dev" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -293,8 +285,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554887811657</updated>
+      <workItem from="1556476590080" duration="1111000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1111000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -307,9 +303,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18241903" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18498659" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -317,11 +312,11 @@
       <window_info anchor="bottom" id="Version Control" order="2" sideWeight="0.4990086" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.38526914" />
       <window_info anchor="bottom" id="Python Console" order="4" weight="0.2592068" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49834764" weight="0.34985834" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="5" sideWeight="0.49834764" visible="true" weight="0.3493635" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50165236" side_tool="true" weight="0.30736545" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.3243626" />
-      <window_info active="true" anchor="bottom" id="Run" order="9" sideWeight="0.49966952" visible="true" weight="0.43909347" />
+      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.49966952" weight="0.43909347" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="12" weight="0.3286119" />
@@ -355,8 +350,8 @@
       <window_info anchor="right" id="Database" order="4" />
     </layout-to-restore>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -366,34 +361,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="41" column="72" lean-forward="true" selection-start-line="7" selection-end-line="41" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/experienceExtract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="5" selection-end-line="46" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/button _for_matching.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/geograpy/places.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/encodings/cp1252.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/geograpy/extraction.py" />
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/job_nltk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="26" lean-forward="true" selection-start-line="1" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/locationExtract.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-347">
@@ -427,16 +394,21 @@
       <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/locations2.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="117" selection-start-column="114" selection-end-column="117" />
         </state>
       </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/skills.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state>
+          <caret column="112" selection-start-column="106" selection-end-column="112" />
+        </state>
+      </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
@@ -445,21 +417,10 @@
           <caret column="13319" lean-forward="true" selection-start-column="13319" selection-end-column="13319" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state>
-          <caret column="112" selection-start-column="106" selection-end-column="112" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/conda/common/configuration.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/flask_wtf/recaptcha/widgets.py" />
-    <entry file="file://C:/Python/Python37/Lib/site-packages/conda/_vendor/toolz/functoolz.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="466" selection-start-line="466" selection-end-line="466" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/Python/Python37/Lib/site-packages/conda/_vendor/toolz/functoolz.py" />
     <entry file="file://C:/Python/Python37/Lib/runpy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -467,13 +428,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python/Python37/Lib/site-packages/conda/common/configuration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/Python/Python37/Lib/site-packages/conda/common/configuration.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/spacy/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
@@ -632,24 +587,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-            <marker date="1556113540334" expanded="true" signature="2378:2550" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
+        <state relative-caret-position="481">
           <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2775">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/activate">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-385">
+          <caret line="42" column="153" selection-start-line="42" selection-start-column="153" selection-end-line="42" selection-end-column="153" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-223">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.ps1">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-875" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/activate_this.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-525" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/activate.xsh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/asadmin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/cfadmin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Scripts/bundle_image">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
         </state>
       </provider>
     </entry>

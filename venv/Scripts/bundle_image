@@ -18,9 +18,9 @@ if __name__ == "__main__":
     for instance_id in args:
         try:
             s = Server.find(instance_id=instance_id).next()
-            print "Found old server object"
+            print ("Found old server object")
         except StopIteration:
-            print "New Server Object Created"
+            print ("New Server Object Created")
             s = Server.create_from_instance_id(instance_id, options.name)
         assert(s.hostname is not None)
         b = s.get_bundler(uname=options.uname)
