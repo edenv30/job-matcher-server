@@ -19,7 +19,7 @@ def extract_location():
     tokenized_text = word_tokenize(loc)
     classified_text = st.tag(tokenized_text)
     data = pd.read_csv(
-        'C:\\Users\\Eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
+        'C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
     # extract values
     location = list(data.columns.values)
     arr=[]

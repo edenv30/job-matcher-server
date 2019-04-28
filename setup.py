@@ -34,7 +34,6 @@ setup(
         "gensim",
         "scipy",
         "sklearn",
-        "pickle"
-
+        "matplotlib"
     ]
 )

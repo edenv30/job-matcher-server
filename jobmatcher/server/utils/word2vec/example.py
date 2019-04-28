@@ -1,7 +1,7 @@
 # from gensim.models import word2vec
 # import logging
 # logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-# sentences = word2vec.Text8Corpus('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\word2vec\\text8')
+# sentences = word2vec.Text8Corpus('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\word2vec\\text8')
 # model = word2vec.Word2Vec(sentences, size=200)
 #
 # print('example file')

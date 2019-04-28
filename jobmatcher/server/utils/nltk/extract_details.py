@@ -63,7 +63,7 @@ def extract_location_job(str):
 #     tokenized_text = word_tokenize(loc)
 #     classified_text = st.tag(tokenized_text)
 #     data = pd.read_csv(
-#         'C:\\Users\\Eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
+#         'C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
 #     # extract values
 #     location = list(data.columns.values)
 #     arr=[]
@@ -89,10 +89,10 @@ def extract_skills(resume_text):
     tokens = [token.text for token in nlp_text if not token.is_stop]
 
     # reading the csv file
-    # C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv
+    # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv
     # for Tal : C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk
     # C:\Users\eden\PycharmProjects\server\job-matcher-server\jobmatcher\server\utils\nltk\skills.csv
-    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
     # extract values
     skills = list(data.columns.values)
     skillset = []
@@ -238,9 +238,10 @@ def extract_location(resume_text, match_threshold=90):
     """
     location_matches = []
     # load the locations2 csv file (will be used as the source of comparison)
-    # C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations2.csv
     # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv
-    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\locations2.csv')
+    # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv
+
+    data = pd.read_csv('utils/nltk/locations2.csv')
     locations = list(data.columns.values)
     resume_text = resume_text.lower()
     for location in locations:

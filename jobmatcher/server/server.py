@@ -17,6 +17,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 from jobmatcher.server.utils.SOS import locationExtract , job_nltk
 from jobmatcher.server.utils.nltk import job_extract, extract_details
+from jobmatcher.server.utils.location import location
 
 from jobmatcher.server.utils.word2vec import matching
 
@@ -83,6 +84,12 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
+
+    result = extract_details.extract_location("Tel Aviv C++ Python ")
+
+    # location.calculateDistance()
+    distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
+
 
     # result = extract_details.extract_location("Tel Aviv C++ Python ")
     # print(result)
