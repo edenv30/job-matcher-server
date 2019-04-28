@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a21251ac-f55a-4914-ba25-988eb338af34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nltk/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nltk/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nltk/lib/ngram.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nltk/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/nltk/test/ngram.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/activate.xsh" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/activate.xsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/bundle_image" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/bundle_image" afterDir="false" />
-    </list>
+    <list default="true" id="a21251ac-f55a-4914-ba25-988eb338af34" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,12 +274,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554887811657</updated>
-      <workItem from="1556476590080" duration="1111000" />
+      <workItem from="1556476590080" duration="1304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1111000" />
+    <option name="totallyTimeSpent" value="1304000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
