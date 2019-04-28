@@ -19,6 +19,8 @@ from jobmatcher.server.utils.SOS import locationExtract , job_nltk
 from jobmatcher.server.utils.nltk import job_extract, extract_details
 from jobmatcher.server.utils.location import location
 
+from jobmatcher.server.utils.word2vec import matching
+
 app = Flask(__name__)
 CORS(app)
 
@@ -88,5 +90,9 @@ if __name__ == '__main__':
     # location.calculateDistance()
     distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
 
+
+    # result = extract_details.extract_location("Tel Aviv C++ Python ")
+    # print(result)
+    t1 = matching.match_jobs2cv()
 
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

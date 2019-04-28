@@ -35,5 +35,6 @@ setup(
         "scipy",
         "sklearn",
         "matplotlib",
+        "pickle"
     ]
 )
