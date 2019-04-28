@@ -62,8 +62,7 @@ def extract_location_job(str):
 #           'ID: 316178748 .'
 #     tokenized_text = word_tokenize(loc)
 #     classified_text = st.tag(tokenized_text)
-#     data = pd.read_csv(
-#         'C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations.csv')
+#     data = pd.read_csv('utils/nltk/locations.csv')
 #     # extract values
 #     location = list(data.columns.values)
 #     arr=[]
@@ -92,7 +91,7 @@ def extract_skills(resume_text):
     # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv
     # for Tal : C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk
     # C:\Users\eden\PycharmProjects\server\job-matcher-server\jobmatcher\server\utils\nltk\skills.csv
-    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
+    data = pd.read_csv('utils/nltk/skills.csv')
     # extract values
     skills = list(data.columns.values)
     skillset = []
