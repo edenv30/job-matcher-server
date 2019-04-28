@@ -86,7 +86,7 @@ if __name__ == '__main__':
     result = extract_details.extract_location("Tel Aviv C++ Python ")
 
     # location.calculateDistance()
-    distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
+    #distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
 
 
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

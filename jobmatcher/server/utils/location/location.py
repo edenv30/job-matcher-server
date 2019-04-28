@@ -4,6 +4,11 @@ import urllib
 import requests
 import sys
 
+from jobmatcher.server.utils.nltk.extract_details import extract_location
+from jobmatcher.server.modules.job.job import Job
+
+
+
 def get_distance(coordinate_1, coordinate_2):
     from math import sin, cos, sqrt, atan2, radians
 
@@ -36,10 +41,12 @@ def calculate_distance_bing(origin, dest):
     try:
         origin_point = origin_req.json()['resourceSets'][0]['resources'][0]['point']['coordinates']
         dest_point = dest_req.json()['resourceSets'][0]['resources'][0]['point']['coordinates']
-    except Exception: # TODO: in case it doesnt recognize the city - take care!!!
+    except Exception:  # TODO: in case it doesnt recognize the city - take care!!!
         return -1
 
     distance = get_distance(origin_point, dest_point)
+    # print("Distance: " + origin + " - " + dest)
+    # print(distance)
     return distance
 
 
@@ -86,6 +93,89 @@ def calculateDistance():
 
         except:
             print('Error while parsing JSON response, program terminated.')
+
+
+# function getting 2 lists to compare between them: user location and list of job's location
+def handle_location_match(user_location, job_location):
+    # TODO: add case if returned value is -1 & add checking that user location and job location exists...
+    print("handle_location_match")
+    total_distances = []
+    min_distance = 0
+    score = -1
+
+
+    for x in user_location:
+        for y in job_location:
+            total_distances.append(calculate_distance_bing(x, y))
+
+
+
+    min_distance = total_distances[0]
+    for n in total_distances:
+        if n < min_distance:
+            min_distance = n
+
+    print("min_distance")
+    print(min_distance)
+
+    if min_distance >= 0 and min_distance <= 20:
+        score = 0.99
+    elif min_distance >= 20 and min_distance <= 40:
+        score = 0.85
+    elif min_distance >= 40 and min_distance <= 100:
+        score = 0.60
+    elif min_distance >= 100 and min_distance <= 200:
+        score = 0.20
+    elif min_distance >= 200:
+        score = 0.1
+
+    print("score: ")
+    print(score)
+    return score
+
+#getting job id object & user location. find location's match - return score
+def matchHandler(job_id, user_location):
+    print("matchHandler FUNCTION")
+    # print("job_id:")
+    # print(job_id)
+    # print("user_location:")
+    # print(user_location)
+
+    # TODO: add validity checks: if all fields exist, if score = -1 then put error
+
+    total_distance = []
+    min_distance = 0
+    score = -1
+    job_location = []
+
+    job = Job.objects.get(pk=job_id)
+    job_location = extract_location(job.location)
+
+    for x in user_location:
+        for y in job_location:
+            total_distance.append(calculate_distance_bing(x, y))
+
+    min_distance = total_distance[0]
+    for n in total_distance:
+        if n < min_distance:
+            min_distance = n
+
+    # TODO: do CONSTANT variables for each degree of distance
+    if min_distance >= 0 and min_distance <= 20:
+        score = 0.99
+    elif min_distance >= 20 and min_distance <= 40:
+        score = 0.85
+    elif min_distance >= 40 and min_distance <= 100:
+        score = 0.60
+    elif min_distance >= 100 and min_distance <= 200:
+        score = 0.20
+    elif min_distance >= 200:
+        score = 0.1
+
+    print("score: ")
+    print(score)
+    return score
+
 
 
 

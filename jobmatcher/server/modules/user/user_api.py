@@ -12,6 +12,7 @@ from jobmatcher.server.utils import utils as u
 
 from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
+from jobmatcher.server.modules.job.job import Job
 
 # import all nltk - extract fields functions
 from jobmatcher.server.utils.nltk.extract_details import extract_education
@@ -19,6 +20,8 @@ from jobmatcher.server.utils.nltk.extract_details import extract_experience
 from jobmatcher.server.utils.nltk.extract_details import extract_skills
 from jobmatcher.server.utils.nltk.extract_details import extract_location
 
+from jobmatcher.server.utils.location.location import handle_location_match
+from jobmatcher.server.utils.location.location import matchHandler
 
 
 class RegisterUserApi(Resource):
@@ -125,9 +128,9 @@ class UserUpdateApi(Resource):
 
 class UserPreferencesApi(Resource):
     @require_authentication
-    def post(self,user_id):
-        # changes needed: adding assert, adding try&except,user will be able to load only 1 CV file
-        # taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+    def post(self, user_id):
+        # TODO: adding assert, adding try&except,user will be able to load only 1 CV file
+        # TODO: taking care if user want to delete his current cv file, change method to PUT(instead of POST)
         print("UserPreferencesApi")
         print(user_id)
         payload = request.json.get('body')
@@ -141,35 +144,30 @@ class UserPreferencesApi(Resource):
         user.save()
 
 
-
 class UserFindMatchApi(Resource):
     @require_authentication
     def post(self, user_id):
-        print(" === UserFindMatchApi ===")
-        print("user_id: " + user_id)
+        # print(" === UserFindMatchApi ===")
+        # print("user_id: " + user_id)
 
-        # here we are going to return all matched results we found
-        # skills = []
-        # education = []
-        # experience = []
-
-        #user = User.objects.get(email=payload.get('email', None))
         user = User.objects.get(pk=user_id)
-        # mail = user.email
-        # print("user.email: " + mail)
         resume = user.cvs[0].text
-        # print("Resume: ")
-        # print(resume)
 
-        locations = extract_location(resume)
-        skills = extract_skills(resume)
-        education = extract_education(resume)
-        experience = extract_experience(resume)
-        print("******** RESULTS SKILLS ***********")
-        print(skills)
-        print("******** RESULTS EDUCATION ***********")
-        print(education)
-        print("******** RESULTS EXPERIENCE ***********")
-        print(experience)
-        print("******** RESULTS LOCATION ***********")
-        print(list(locations))
+
+        user_location = []
+        user_location = extract_location(resume)
+
+        job = Job.objects.first()  # getting job id for the first object - temp for now
+        job_id = job.id
+        matchHandler(job_id, user_location)
+
+
+
+
+
+
+
+
+
+
+
