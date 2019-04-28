@@ -240,7 +240,8 @@ def extract_location(resume_text, match_threshold=90):
     # load the locations2 csv file (will be used as the source of comparison)
     # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv
     # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv
-    data = pd.read_csv('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\nltk\\locations2.csv')
+
+    data = pd.read_csv('utils/nltk/locations2.csv')
     locations = list(data.columns.values)
     resume_text = resume_text.lower()
     for location in locations:
