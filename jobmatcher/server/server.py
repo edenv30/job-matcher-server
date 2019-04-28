@@ -17,6 +17,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 from jobmatcher.server.utils.SOS import locationExtract , job_nltk
 from jobmatcher.server.utils.nltk import job_extract, extract_details
+from jobmatcher.server.utils.location import location
 
 app = Flask(__name__)
 CORS(app)
@@ -83,5 +84,9 @@ if __name__ == '__main__':
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
     result = extract_details.extract_location("Tel Aviv C++ Python ")
-    print(result)
+
+    # location.calculateDistance()
+    distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
+
+
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

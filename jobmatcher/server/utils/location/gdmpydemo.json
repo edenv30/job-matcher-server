@@ -1,0 +1,59 @@
+{
+   "destination_addresses" : [ "San Francisco, CA, USA", "Victoria, BC, Canada" ],
+   "origin_addresses" : [ "Vancouver, BC, Canada", "Seattle, WA, USA" ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1,528 km",
+                  "value" : 1528179
+               },
+               "duration" : {
+                  "text" : "15 hours 9 mins",
+                  "value" : 54555
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "114 km",
+                  "value" : 114191
+               },
+               "duration" : {
+                  "text" : "3 hours 2 mins",
+                  "value" : 10941
+               },
+               "status" : "OK"
+            }
+         ]
+      },
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1,300 km",
+                  "value" : 1299784
+               },
+               "duration" : {
+                  "text" : "12 hours 41 mins",
+                  "value" : 45669
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "172 km",
+                  "value" : 171979
+               },
+               "duration" : {
+                  "text" : "4 hours 29 mins",
+                  "value" : 16115
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}
