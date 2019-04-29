@@ -85,10 +85,8 @@ if __name__ == '__main__':
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
-    result = extract_details.extract_location("Tel Aviv C++ Python ")
-
-    # location.calculateDistance()
-    distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
+    # result = extract_details.extract_location("Tel Aviv C++ Python ")
+    # distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
 
 
     # result = extract_details.extract_location("Tel Aviv C++ Python ")
