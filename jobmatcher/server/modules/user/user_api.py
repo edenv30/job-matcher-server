@@ -18,7 +18,7 @@ from jobmatcher.server.utils.nltk.extract_details import extract_education
 from jobmatcher.server.utils.nltk.extract_details import extract_experience
 from jobmatcher.server.utils.nltk.extract_details import extract_skills
 from jobmatcher.server.utils.nltk.extract_details import extract_location
-
+from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
 
 
 class RegisterUserApi(Resource):
@@ -173,3 +173,19 @@ class UserFindMatchApi(Resource):
         print(experience)
         print("******** RESULTS LOCATION ***********")
         print(list(locations))
+
+class UserFindMatchWord2vecApi (Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
+        user = User.objects.get(pk=user_id)
+        cv_id = user.cvs[0].id
+        cv_text = user.cvs[0].text
+        jobs_id_list = match_jobs2cv(cv_text)
+        for k,v in jobs_id_list.items():
+            if k not in  user.jobs:
+                user.jobs[k] = v
+        user.save()
+        response = get_list_matching_job(jobs_id_list)
+
+        return response

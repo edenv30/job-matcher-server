@@ -26,7 +26,7 @@ def build_vocab(jobs):
         temp.append(token.lemma_)
         vector.append(temp)
     # adding the skills file and the edcucation to the vocabulary
-    data = pd.read_csv('utils/nltk/skills.csv')
+    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
     skills = nlp(str(data.columns.values))
     for s in skills:
         if s.lemma_ not in vector:
@@ -46,11 +46,11 @@ def build_vocab(jobs):
 
 
 #@app.route('/find/', methods=['GET'])
-def avg_vec4cv():
-    # TODO: needs to be the data of the cv user by GET HTTP request
-    #data = request.args.get('value')
-    cv = CV.objects[0]
-    data = cv['text']
+def avg_vec4cv(cv_text):
+    # #data = request.args.get('value')
+    # cv = CV.objects[0]
+    # data = cv['text']
+    data = cv_text
     w2v = []
     w2v_value = []
     data = data.lower()
@@ -78,10 +78,11 @@ def get_jobs_from_db():
     return jobs
 
 
-def match_jobs2cv():
+
+def match_jobs2cv(cv_text):
     jobs=get_jobs_from_db()
     build_vocab(jobs)
-    Q_w2v = avg_vec4cv()
+    Q_w2v = avg_vec4cv(cv_text)
     # Example of document represented by average of each document term vectors.
     D_w2v = {}
 
@@ -105,11 +106,20 @@ def match_jobs2cv():
         # print(val[1])
     # print(retrieval)
     # TODO: to make if the precent of the job up than __% ?
-    jobsss = []
+    jobsss = {}
     for k,v in retrieval.items():
-        if v > 0.4:
-            jobsss.append(k)
+        if v > 0.7:
+            jobsss[k] = v
+
+    return  jobsss
 
 
+def get_list_matching_job(dic):
+    job_score = {}
+    for k , v in dic.items():
+        job = Job.objects.get(identifier=k)
+        j_role = job.role_name
+        j_link = job.link
+        job_score[k] =((j_role,j_link,v))
 
-    return  retrieval
+    return job_score

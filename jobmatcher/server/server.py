@@ -93,6 +93,5 @@ if __name__ == '__main__':
 
     # result = extract_details.extract_location("Tel Aviv C++ Python ")
     # print(result)
-    t1 = matching.match_jobs2cv()
 
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
