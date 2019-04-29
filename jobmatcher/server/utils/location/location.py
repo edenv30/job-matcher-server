@@ -46,55 +46,55 @@ def calculate_distance_bing(origin, dest):
     return distance
 
 
-def calculateDistance():
-    api_key = 'AIzaSyB9P-1lxbSHgoXckhambqAj82khKGMK36s'
-
-    url = 'https://maps.googleapis.com/maps/api/distancematrix/json?'
-
-    origins = ['Vancouver, BC', 'Seattle']
-    destinations = ['San Francisco', 'Victoria, BC']
-
-
-    payload = {
-        'origins': '|'.join(origins),
-        'destinations': '|'.join(destinations),
-        'mode': 'driving',
-        'key': api_key
-    }
-
-
-    r = requests.get(url, params=payload)
-    print("r.url: " + r.url)
-
-
-    if r.status_code != 200:
-        print('HTTP status code {} received, program terminated.'.format(r.status_code))
-    else:
-        try:
-            print("locationnnnnnnn")
-            x = json.loads(r.text)
-            print("r.text = " + r.text)
-            for isrc, src in enumerate(x['origin_addresses']):
-                for idst, dst in enumerate(x['destination_addresses']):
-                    row = x['rows'][isrc]
-                    cell = row['elements'][idst]
-                    if cell['status'] == 'OK':
-                        print('{} to {}: {}, {}.'.format(src, dst, cell['distance']['text'], cell['duration']['text']))
-                    else:
-                        print('{} to {}: status = {}'.format(src, dst, cell['status']))
-
-            with open('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\location\\gdmpydemo.json',
-                      'w') as f:
-                f.write(r.text)
-
-        except:
-            print('Error while parsing JSON response, program terminated.')
+# def calculateDistance():
+#     api_key = 'AIzaSyB9P-1lxbSHgoXckhambqAj82khKGMK36s'
+#
+#     url = 'https://maps.googleapis.com/maps/api/distancematrix/json?'
+#
+#     origins = ['Vancouver, BC', 'Seattle']
+#     destinations = ['San Francisco', 'Victoria, BC']
+#
+#
+#     payload = {
+#         'origins': '|'.join(origins),
+#         'destinations': '|'.join(destinations),
+#         'mode': 'driving',
+#         'key': api_key
+#     }
+#
+#
+#     r = requests.get(url, params=payload)
+#     print("r.url: " + r.url)
+#
+#
+#     if r.status_code != 200:
+#         print('HTTP status code {} received, program terminated.'.format(r.status_code))
+#     else:
+#         try:
+#             print("locationnnnnnnn")
+#             x = json.loads(r.text)
+#             print("r.text = " + r.text)
+#             for isrc, src in enumerate(x['origin_addresses']):
+#                 for idst, dst in enumerate(x['destination_addresses']):
+#                     row = x['rows'][isrc]
+#                     cell = row['elements'][idst]
+#                     if cell['status'] == 'OK':
+#                         print('{} to {}: {}, {}.'.format(src, dst, cell['distance']['text'], cell['duration']['text']))
+#                     else:
+#                         print('{} to {}: status = {}'.format(src, dst, cell['status']))
+#             # C:/Users/eden/PycharmProjects/server/job-matcher-server/jobmatcher/server/utils/location/gdmpydemo.json
+#             # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\location\\gdmpydemo.json
+#             with open('C:/Users/eden/PycharmProjects/server/job-matcher-server/jobmatcher/server/utils/location/gdmpydemo.json',
+#                       'w') as f:
+#                 f.write(r.text)
+#
+#         except:
+#             print('Error while parsing JSON response, program terminated.')
 
 
 # getting job id object & user location. find location's match - return score
 def matchHandler(job_id, user_location):
-    print("matchHandler FUNCTION")
-
+    # print("matchHandler FUNCTION")
 
     # TODO: add validity checks: if all fields exist, if score = -1 then put error
 
@@ -103,18 +103,20 @@ def matchHandler(job_id, user_location):
     score = -1
     job_location = []
 
-    job = Job.objects.get(pk=job_id)
+    job = Job.objects.get(identifier=job_id)
     job_location = extract_location(job.location)
 
     for x in user_location:
         for y in job_location:
             total_distance.append(calculate_distance_bing(x, y))
 
-    min_distance = total_distance[0]
-    for n in total_distance:
-        if n < min_distance:
-            min_distance = n
-
+    if len(total_distance) != 0:
+        min_distance = total_distance[0]
+        for n in total_distance:
+            if n < min_distance:
+                min_distance = n
+    else:
+        min_distance =1000
     # TODO: do CONSTANT variables for each degree of distance
     if min_distance >= 0 and min_distance <= 20:
         score = 0.99
@@ -127,8 +129,8 @@ def matchHandler(job_id, user_location):
     elif min_distance >= 200:
         score = 0.1
 
-    print("score: ")
-    print(score)
+    # print("score: ")
+    # print(score)
     return score
 
 

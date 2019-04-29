@@ -5,7 +5,7 @@ import numpy as np
 from scipy import spatial
 from jobmatcher.server.modules.job.job import Job
 from jobmatcher.server.modules.cv.CV import CV
-from jobmatcher.server.utils.nltk import job_extract , cv_extract
+from jobmatcher.server.utils.location.location import matchHandler
 import pandas as pd
 
 
@@ -79,7 +79,7 @@ def get_jobs_from_db():
 
 
 
-def match_jobs2cv(cv_text):
+def match_jobs2cv(cv_text , user_location):
     jobs=get_jobs_from_db()
     build_vocab(jobs)
     Q_w2v = avg_vec4cv(cv_text)
@@ -101,14 +101,18 @@ def match_jobs2cv(cv_text):
     # Make the retrieval using cosine similarity between query and document vectors.
     retrieval = {}
     for key, val in D_w2v.items():
-        retrieval[key] = 1 - spatial.distance.cosine(Q_w2v, val[0])
+        # location score eith bing maps
+        loc_score= (matchHandler(key, user_location))*0.3
+        # all cv details without location - score with word2vec
+        reset_score= (1 - spatial.distance.cosine(Q_w2v, val[0]))*0.7
+        retrieval[key] = loc_score + reset_score
         # print(retrieval[key])
         # print(val[1])
     # print(retrieval)
-    # TODO: to make if the precent of the job up than __% ?
+    # TODO: to check if we need to change the > 0.7 ?
     jobsss = {}
     for k,v in retrieval.items():
-        if v > 0.7:
+        if v > 0.6:
             jobsss[k] = v
 
     return  jobsss
