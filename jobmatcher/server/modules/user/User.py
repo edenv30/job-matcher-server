@@ -20,6 +20,9 @@ class User(BaseDocument):
     cvs = me.ListField(me.ReferenceField('CV'))
     #matches = me.ListField(me.ReferenceField('JOB'))
 
+    jobs = me.DictField(required=False)
+
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
