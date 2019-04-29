@@ -4,6 +4,9 @@ import urllib
 import requests
 import sys
 
+from jobmatcher.server.modules.job.job import Job
+from jobmatcher.server.utils.nltk.extract_details import extract_location
+
 def get_distance(coordinate_1, coordinate_2):
     from math import sin, cos, sqrt, atan2, radians
 
@@ -88,5 +91,44 @@ def calculateDistance():
             print('Error while parsing JSON response, program terminated.')
 
 
+# getting job id object & user location. find location's match - return score
+def matchHandler(job_id, user_location):
+    print("matchHandler FUNCTION")
+
+
+    # TODO: add validity checks: if all fields exist, if score = -1 then put error
+
+    total_distance = []
+    min_distance = 0
+    score = -1
+    job_location = []
+
+    job = Job.objects.get(pk=job_id)
+    job_location = extract_location(job.location)
+
+    for x in user_location:
+        for y in job_location:
+            total_distance.append(calculate_distance_bing(x, y))
+
+    min_distance = total_distance[0]
+    for n in total_distance:
+        if n < min_distance:
+            min_distance = n
+
+    # TODO: do CONSTANT variables for each degree of distance
+    if min_distance >= 0 and min_distance <= 20:
+        score = 0.99
+    elif min_distance >= 20 and min_distance <= 40:
+        score = 0.85
+    elif min_distance >= 40 and min_distance <= 100:
+        score = 0.60
+    elif min_distance >= 100 and min_distance <= 200:
+        score = 0.20
+    elif min_distance >= 200:
+        score = 0.1
+
+    print("score: ")
+    print(score)
+    return score
 
 

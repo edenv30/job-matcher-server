@@ -85,14 +85,12 @@ if __name__ == '__main__':
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
-    result = extract_details.extract_location("Tel Aviv C++ Python ")
-
-    # location.calculateDistance()
-    distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
+    # result = extract_details.extract_location("Tel Aviv C++ Python ")
+    # distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
 
 
     # result = extract_details.extract_location("Tel Aviv C++ Python ")
     # print(result)
-    t1 = matching.match_jobs2cv()
+
 
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
