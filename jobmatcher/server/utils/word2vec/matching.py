@@ -5,7 +5,7 @@ import numpy as np
 from scipy import spatial
 from jobmatcher.server.modules.job.job import Job
 from jobmatcher.server.modules.cv.CV import CV
-from jobmatcher.server.utils.nltk import job_extract , cv_extract
+from jobmatcher.server.utils.location.location import matchHandler
 import pandas as pd
 
 
@@ -26,7 +26,7 @@ def build_vocab(jobs):
         temp.append(token.lemma_)
         vector.append(temp)
     # adding the skills file and the edcucation to the vocabulary
-    data = pd.read_csv('utils/nltk/skills.csv')
+    data = pd.read_csv('C:\\Users\\eden\\PycharmProjects\\server\\job-matcher-server\\jobmatcher\\server\\utils\\nltk\\skills.csv')
     skills = nlp(str(data.columns.values))
     for s in skills:
         if s.lemma_ not in vector:
@@ -46,11 +46,11 @@ def build_vocab(jobs):
 
 
 #@app.route('/find/', methods=['GET'])
-def avg_vec4cv():
-    # TODO: needs to be the data of the cv user by GET HTTP request
-    #data = request.args.get('value')
-    cv = CV.objects[0]
-    data = cv['text']
+def avg_vec4cv(cv_text):
+    # #data = request.args.get('value')
+    # cv = CV.objects[0]
+    # data = cv['text']
+    data = cv_text
     w2v = []
     w2v_value = []
     data = data.lower()
@@ -78,10 +78,11 @@ def get_jobs_from_db():
     return jobs
 
 
-def match_jobs2cv():
+
+def match_jobs2cv(cv_text , user_location):
     jobs=get_jobs_from_db()
     build_vocab(jobs)
-    Q_w2v = avg_vec4cv()
+    Q_w2v = avg_vec4cv(cv_text)
     # Example of document represented by average of each document term vectors.
     D_w2v = {}
 
@@ -100,16 +101,29 @@ def match_jobs2cv():
     # Make the retrieval using cosine similarity between query and document vectors.
     retrieval = {}
     for key, val in D_w2v.items():
-        retrieval[key] = 1 - spatial.distance.cosine(Q_w2v, val[0])
+        # location score eith bing maps
+        loc_score= (matchHandler(key, user_location))*0.3
+        # all cv details without location - score with word2vec
+        reset_score= (1 - spatial.distance.cosine(Q_w2v, val[0]))*0.7
+        retrieval[key] = loc_score + reset_score
         # print(retrieval[key])
         # print(val[1])
     # print(retrieval)
-    # TODO: to make if the precent of the job up than __% ?
-    jobsss = []
+    # TODO: to check if we need to change the > 0.7 ?
+    jobsss = {}
     for k,v in retrieval.items():
-        if v > 0.4:
-            jobsss.append(k)
+        if v > 0.6:
+            jobsss[k] = v
+
+    return  jobsss
 
 
+def get_list_matching_job(dic):
+    job_score = {}
+    for k , v in dic.items():
+        job = Job.objects.get(identifier=k)
+        j_role = job.role_name
+        j_link = job.link
+        job_score[k] =((j_role,j_link,v))
 
-    return  retrieval
+    return job_score
