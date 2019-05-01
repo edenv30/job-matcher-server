@@ -22,7 +22,7 @@ from jobmatcher.server.utils.nltk.extract_details import extract_location
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
 from jobmatcher.server.utils.location.location import matchHandler
 
-
+from jobmatcher.server.modules.user.user_api_utils import checkUserFile
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -83,6 +83,11 @@ class UserUploadApi(Resource):
 
         payload = request.json
 
+        if not (checkUserFile(user_id)):
+            print("User cannot upload file !!!!!!!!!!!!!!!!!!")
+            return False
+
+
 
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
@@ -120,7 +125,7 @@ class UserUpdateApi(Resource):
         ppost.save()
 
     def get (self,user_id):
-        print('------ get update profile ------')
+        # print('------ get update profile ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
         # print (user.first_name)
