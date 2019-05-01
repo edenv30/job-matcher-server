@@ -15,7 +15,7 @@ from jobmatcher.server.modules.job import scrapUrl
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from jobmatcher.server.utils.SOS import locationExtract , job_nltk
+from jobmatcher.server.utils.SOS import locationExtract , job_nltk,pdfFIle
 from jobmatcher.server.utils.nltk import job_extract, extract_details
 from jobmatcher.server.utils.location import location
 from jobmatcher.server.utils.word2vec import matching
@@ -91,5 +91,5 @@ if __name__ == '__main__':
     # result = extract_details.extract_location("Tel Aviv C++ Python ")
     # print(result)
     # print(recommendation('5caef73ff0dbb33148fe9c7e'))
-
+    pdfFIle.convertHtmlToDfdFile('https://www.w3schools.com/howto/howto_js_filter_table.asp')
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)

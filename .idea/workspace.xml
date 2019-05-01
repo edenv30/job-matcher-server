@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a21251ac-f55a-4914-ba25-988eb338af34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/jobmatcher/server/modules/init_apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/modules/init_apis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jobmatcher/server/modules/user/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/modules/user/User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jobmatcher/server/modules/user/user_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/modules/user/user_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jobmatcher/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jobmatcher/server/utils/dict_lang_programing.py" beforeDir="false" afterPath="$PROJECT_DIR$/jobmatcher/server/utils/dict_lang_programing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,28 +14,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+            <state relative-caret-position="725">
+              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1362#1414#0" />
-                <element signature="e#1461#1753#0" />
-                <element signature="e#1838#1865#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="124" column="28" lean-forward="true" selection-start-line="124" selection-start-column="28" selection-end-line="124" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,11 +29,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="41" column="4" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+            <state relative-caret-position="150">
+              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <element signature="e#1400#1416#0" />
               </folding>
             </state>
           </provider>
@@ -60,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/dict_lang_programing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+            <state relative-caret-position="775">
+              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -69,14 +50,50 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jobmatcher/server/modules/user/User.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/pdfFIle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+            <state relative-caret-position="-764">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/configuration.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="19" column="11" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/pdfkit.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="875">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="925">
+              <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -84,7 +101,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jobmatcher/server/modules/user/user_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-275">
+            <state relative-caret-position="1075">
               <caret line="132" column="8" selection-start-line="132" selection-end-line="133" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
@@ -93,18 +110,7 @@
                 <element signature="e#2389#2541#0" />
                 <element signature="e#2579#3281#0" />
                 <element signature="e#3319#4329#0" />
-                <element signature="e#4371#4942#0" />
-                <element signature="e#4983#5454#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jobmatcher/server/modules/init_apis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="67" selection-start-line="1" selection-start-column="67" selection-end-line="1" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -179,7 +185,6 @@
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/nltk/locations2.csv" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/word2vec/example.py" />
         <option value="$PROJECT_DIR$/venv/Lib/site-packages/pattern3/text/tree.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/word2vec/__init__.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/nltk/job_extract.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/nltk/extract_details.py" />
@@ -196,7 +201,9 @@
         <option value="$PROJECT_DIR$/jobmatcher/server/modules/user/User.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/dict_lang_programing.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/jobmatcher/server/server.py" />
+        <option value="$PROJECT_DIR$/jobmatcher/server/utils/SOS/pdfFIle.py" />
       </list>
     </option>
   </component>
@@ -211,7 +218,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,18 +258,11 @@
               <item name="utils" type="462c0819:PsiDirectoryNode" />
               <item name="SOS" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="job-matcher-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="job-matcher-server" type="462c0819:PsiDirectoryNode" />
-              <item name="jobmatcher" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="word2vec" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,12 +328,13 @@
       <workItem from="1556476590080" duration="1304000" />
       <workItem from="1556478378050" duration="1540000" />
       <workItem from="1556480367491" duration="1220000" />
-      <workItem from="1556482029145" duration="17645000" />
+      <workItem from="1556482029145" duration="20854000" />
+      <workItem from="1556711282940" duration="3428000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21709000" />
+    <option name="totallyTimeSpent" value="28346000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -349,7 +349,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1930295" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19571045" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -406,38 +406,9 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/job_matcher_server$server.coverage" NAME="server Coverage Results" MODIFIED="1556701428172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jobmatcher/server" />
+    <SUITE FILE_PATH="coverage/job_matcher_server$server.coverage" NAME="server Coverage Results" MODIFIED="1556714655360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/jobmatcher/server" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/text8" />
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/locations2.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state>
-          <caret column="117" selection-start-column="114" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/skills.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state>
-          <caret column="13319" lean-forward="true" selection-start-column="13319" selection-end-column="13319" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state>
-          <caret column="112" selection-start-column="106" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/conda/common/configuration.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/flask_wtf/recaptcha/widgets.py" />
-    <entry file="file://C:/Python/Python37/Lib/site-packages/conda/_vendor/toolz/functoolz.py" />
     <entry file="file://C:/Python/Python37/Lib/runpy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -576,13 +547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/nltk/extract_details.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-140">
@@ -597,13 +561,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/example.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
-          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/example.py" />
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/wordEmbeddings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-375">
@@ -649,27 +607,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobmatcher/server/modules/user/user_api.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-275">
-          <caret line="132" column="8" selection-start-line="132" selection-end-line="133" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <element signature="e#1120#1937#0" />
-            <element signature="e#1973#2357#0" />
-            <element signature="e#2389#2541#0" />
-            <element signature="e#2579#3281#0" />
-            <element signature="e#3319#4329#0" />
-            <element signature="e#4371#4942#0" />
-            <element signature="e#4983#5454#0" />
-          </folding>
+        <state relative-caret-position="100">
+          <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/word2vec/matching.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="124" column="28" lean-forward="true" selection-start-line="124" selection-start-column="28" selection-end-line="124" selection-end-column="28" />
+        <state relative-caret-position="3075">
+          <caret line="124" column="28" selection-start-line="124" selection-start-column="28" selection-end-line="124" selection-end-column="28" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
           </folding>
@@ -678,34 +626,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/skillsExtract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="41" column="4" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+        <state relative-caret-position="150">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-            <element signature="e#1400#1416#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/dict_lang_programing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        <state relative-caret-position="775">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/pdfkit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="925">
+          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobmatcher/server/modules/user/user_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="132" column="8" selection-start-line="132" selection-end-line="133" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#1120#1937#0" />
+            <element signature="e#1973#2357#0" />
+            <element signature="e#2389#2541#0" />
+            <element signature="e#2579#3281#0" />
+            <element signature="e#3319#4329#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pdfkit/configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jobmatcher/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="725">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1362#1414#0" />
-            <element signature="e#1461#1753#0" />
-            <element signature="e#1838#1865#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python/Python37/Lib/email/mime/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobmatcher/server/utils/SOS/pdfFIle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-764">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
