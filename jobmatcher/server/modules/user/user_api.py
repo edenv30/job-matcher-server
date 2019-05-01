@@ -131,6 +131,16 @@ class UserUpdateApi(Resource):
         # print (user.first_name)
         return [user.first_name,user.last_name,user.email,user.tags,user.password_hash]
 
+class UserSetStusApi(Resource):
+    def get (self,user_id):
+        print('------ get state status ------')
+        # print(user_id)
+        user=User.objects.get(id=user_id)
+        user.find=False
+        user.save()
+        # print (user.first_name)
+        return [user.find]
+
 class UserPreferencesApi(Resource):
     @require_authentication
     def post(self,user_id):

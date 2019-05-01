@@ -8,9 +8,9 @@ nlp = spacy.load("en_core_web_sm")  # load the English model
 def extract_skills(resume_text):
      nlp_text = nlp(resume_text)
      noun_chunks = []
-     print('noun chunk: ')
+     # print('noun chunk: ')
      for chunk in nlp_text.noun_chunks:  # iterate over the noun chunks in the Doc
-         print(chunk)
+         # print(chunk)
          noun_chunks.append(chunk)
      # removing stop words and implementing word tokenization
      tokens = [token.text for token in nlp_text if not token.is_stop]
@@ -25,8 +25,8 @@ def extract_skills(resume_text):
      # check for one-grams (example: python)
      for token in tokens:
           if token.lower() in skills:
-            print('-----------------')
-            print(token)
+            # print('-----------------')
+            # print(token)
             if token.lower() not in skillset:
                 skillset.append(token.lower())
 
@@ -34,12 +34,13 @@ def extract_skills(resume_text):
      for token in noun_chunks:
          token = token.text.lower().strip()
          if token in skills:
-             print('$$$$$$$$$$$$$$$$$$$$$$$')
-             print(token)
+             # print('$$$$$$$$$$$$$$$$$$$$$$$')
+             # print(token)
              if token.lower() not in skillset:
                 skillset.append(token.lower())
-     print(skillset)
-     return [i.capitalize() for i in set([i.lower() for i in skillset])]
+     # print(skillset)
+     return skillset
+     # return [i.capitalize() for i in set([i.lower() for i in skillset])]
 
 # # import spacy
 # # # loading the model
