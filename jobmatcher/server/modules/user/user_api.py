@@ -23,6 +23,7 @@ from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_mat
 from jobmatcher.server.utils.location.location import matchHandler
 
 from jobmatcher.server.modules.user.user_api_utils import checkUserFile
+from jobmatcher.server.utils.dict_lang_programing import recommendation
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -83,9 +84,9 @@ class UserUploadApi(Resource):
 
         payload = request.json
 
-        if not (checkUserFile(user_id)):
-            print("User cannot upload file !!!!!!!!!!!!!!!!!!")
-            return False
+        # if not (checkUserFile(user_id)):
+        #     print("User cannot upload file !!!!!!!!!!!!!!!!!!")
+        #     return False
 
 
 
@@ -196,3 +197,13 @@ class UserFindMatchWord2vecApi(Resource):
         response = get_list_matching_job(jobs_id_list)
 
         return response
+
+
+class UserGetRecommendation(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print("UserGetRecommendation")
+        rec = {}
+        rec = recommendation(user_id)
+        print("rec:")
+        print(rec)
