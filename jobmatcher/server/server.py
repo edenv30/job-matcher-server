@@ -84,12 +84,7 @@ if __name__ == '__main__':
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
-    # result = extract_details.extract_location("Tel Aviv C++ Python ")
-    # distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
-
-
-    # result = extract_details.extract_location("Tel Aviv C++ Python ")
-    # print(result)
-    # print(recommendation('5caef73ff0dbb33148fe9c7e'))
-    pdfFIle.convertHtmlToDfdFile('https://www.w3schools.com/howto/howto_js_filter_table.asp')
+    # pdfFIle.convertHtmlToDfdFile('https://www.w3schools.com/howto/howto_js_filter_table.asp',
+    #                              'chenyair1617@gmail.com','This is the subject',
+    #                              'This is the subject')
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
