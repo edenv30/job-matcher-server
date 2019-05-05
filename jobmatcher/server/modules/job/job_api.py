@@ -8,7 +8,6 @@ from mongoengine import connect
 from.job import Job
 from jobmatcher.server.utils import utils as u
 
-
 # from pymongo import MongoClient  # to connect the data base
 
 class UploadJobApi(Resource):
@@ -53,3 +52,8 @@ ient[config.DB_NAME]
                 client.close()
         return cursor,u.HTTP_CREATED
         '''
+
+class jobsCounter(Resource):
+    def get(self):
+        print('~~~~~ In func GET in jobsCounter ~~~~~')
+        return len(Job.objects)
