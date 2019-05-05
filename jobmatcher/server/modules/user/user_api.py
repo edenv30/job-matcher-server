@@ -130,7 +130,9 @@ class UserUpdateApi(Resource):
         # print(user_id)
         user=User.objects.get(id=user_id)
         # print (user.first_name)
-        return [user.first_name,user.last_name,user.email,user.tags,user.password_hash]
+        # print("user_tags_amount")
+        # print(len(user.tags))
+        return [user.first_name,user.last_name,user.email,len(user.tags),user.tags,user.password_hash]
 
 class UserSetStusApi(Resource):
     def get (self,user_id):
@@ -184,18 +186,22 @@ class UserFindMatchWord2vecApi(Resource):
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
         # for location score
-        user_location = []
-        user_location = extract_location(cv_text)
-        jobs_id_list = match_jobs2cv(cv_text,user_location)
-        for k,v in jobs_id_list.items():
-            if k not in  user.jobs:
-                user.jobs[k] = v
-
-
-
-        user.save()
-        response = get_list_matching_job(jobs_id_list)
-
+        # user_location = []
+        # user_location = extract_location(cv_text)
+        # jobs_id_list = match_jobs2cv(cv_text,user_location)
+        # for k,v in jobs_id_list.items():
+        #     if k not in  user.jobs:
+        #         user.jobs[k] = v
+        #
+        #
+        # user.save()
+        # response = get_list_matching_job(jobs_id_list)
+        #
+        # return response
+        response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8),
+                    234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9),
+                    222: ('e', 'd',0.7), 111: ('eee','qweqwee',0.8),333:('e','e',0.8), 1212: ('w','w',0.8),
+                    444: ('e', 'd', 0.7), 555: ('eee', 'qweqwee', 0.8), 666: ('e', 'e', 0.8), 777: ('wewe', 'w', 0.8)}
         return response
 
 
