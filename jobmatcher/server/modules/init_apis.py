@@ -1,16 +1,18 @@
 from jobmatcher.server.authentication.authentication_api import AuthenticationApi
-from jobmatcher.server.modules.user.user_api import RegisterUserApi, UserApi,UserUpdateApi
+from jobmatcher.server.modules.user.user_api import RegisterUserApi,UserUpdateApi,UserSetStusApi
 from jobmatcher.server.modules.user.user_api import SignUserApi
 from jobmatcher.server.modules.user.user_api import UserUploadApi
-from jobmatcher.server.modules.job.job_api import UploadJobApi
+from jobmatcher.server.modules.job.job_api import UploadJobApi,jobsCounter
 from jobmatcher.server.modules.user.user_api import UserPreferencesApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi
+from jobmatcher.server.modules.user.user_api import UserGetRecommendation
 
 
 def init_apis(api):
     api.add_resource(RegisterUserApi, '/api/users/register')
     api.add_resource(UserUpdateApi, '/api/user/<string:user_id>/changeProfile')
+    api.add_resource(UserSetStusApi, '/api/user/<string:user_id>/set_status')
     api.add_resource(AuthenticationApi, '/api/auth')
     api.add_resource(SignUserApi, '/api/users/signin')
     api.add_resource(UserUploadApi, '/api/user/<string:user_id>/update')
@@ -18,6 +20,8 @@ def init_apis(api):
     api.add_resource(UserPreferencesApi, '/api/user/<string:user_id>/preferences')
     # api.add_resource(UserFindMatchApi, '/api/user/<string:user_id>/svemtchjbs')
     api.add_resource(UserFindMatchWord2vecApi, '/api/user/<string:user_id>/word2vec')
+    api.add_resource(UserGetRecommendation, '/api/user/<string:user_id>/recommendation')
+    api.add_resource(jobsCounter,'/api/jobscounter')
 
-    # api.add_resource(UserCV, '/api/user/<string:user_id>/cv', '/api/user/<string:user_id>/cv/<string:cv_id>')
+
 

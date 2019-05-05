@@ -82,9 +82,8 @@ def calculate_distance_bing(origin, dest):
 #                         print('{} to {}: {}, {}.'.format(src, dst, cell['distance']['text'], cell['duration']['text']))
 #                     else:
 #                         print('{} to {}: status = {}'.format(src, dst, cell['status']))
-#             # C:/Users/eden/PycharmProjects/server/job-matcher-server/jobmatcher/server/utils/location/gdmpydemo.json
-#             # C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\location\\gdmpydemo.json
-#             with open('C:/Users/eden/PycharmProjects/server/job-matcher-server/jobmatcher/server/utils/location/gdmpydemo.json',
+#
+#             with open('C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\utils\\location\\gdmpydemo.json',
 #                       'w') as f:
 #                 f.write(r.text)
 #

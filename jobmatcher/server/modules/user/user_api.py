@@ -22,7 +22,8 @@ from jobmatcher.server.utils.nltk.extract_details import extract_location
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
 from jobmatcher.server.utils.location.location import matchHandler
 
-
+from jobmatcher.server.modules.user.user_api_utils import checkUserFile
+from jobmatcher.server.utils.dict_lang_programing import recommendation
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -83,6 +84,11 @@ class UserUploadApi(Resource):
 
         payload = request.json
 
+        # if not (checkUserFile(user_id)):
+        #     print("User cannot upload file !!!!!!!!!!!!!!!!!!")
+        #     return False
+
+
 
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
@@ -120,11 +126,23 @@ class UserUpdateApi(Resource):
         ppost.save()
 
     def get (self,user_id):
-        print('------ get update profile ------')
+        # print('------ get update profile ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
         # print (user.first_name)
-        return [user.first_name,user.last_name,user.email,user.tags,user.password_hash]
+        # print("user_tags_amount")
+        # print(len(user.tags))
+        return [user.first_name,user.last_name,user.email,len(user.tags),user.tags,user.password_hash]
+
+class UserSetStusApi(Resource):
+    def get (self,user_id):
+        print('------ get state status ------')
+        # print(user_id)
+        user=User.objects.get(id=user_id)
+        user.find=False
+        user.save()
+        # print (user.first_name)
+        return [user.find]
 
 class UserPreferencesApi(Resource):
     @require_authentication
@@ -185,3 +203,13 @@ class UserFindMatchWord2vecApi(Resource):
                     222: ('e', 'd',0.7), 111: ('eee','qweqwee',0.8),333:('e','e',0.8), 1212: ('w','w',0.8),
                     444: ('e', 'd', 0.7), 555: ('eee', 'qweqwee', 0.8), 666: ('e', 'e', 0.8), 777: ('wewe', 'w', 0.8)}
         return response
+
+
+class UserGetRecommendation(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print("UserGetRecommendation")
+        rec = {}
+        rec = recommendation(user_id)
+        print("rec:")
+        print(rec)

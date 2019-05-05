@@ -34,6 +34,7 @@ setup(
         "gensim",
         "scipy",
         "sklearn",
-        "matplotlib"
+        "matplotlib",
+        "pdfkit"
     ]
 )

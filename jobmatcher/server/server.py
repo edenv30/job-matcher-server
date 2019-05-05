@@ -15,12 +15,11 @@ from jobmatcher.server.modules.job import scrapUrl
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from jobmatcher.server.utils.SOS import locationExtract , job_nltk
+from jobmatcher.server.utils.SOS import locationExtract , job_nltk,pdfFIle
 from jobmatcher.server.utils.nltk import job_extract, extract_details
 from jobmatcher.server.utils.location import location
-
 from jobmatcher.server.utils.word2vec import matching
-
+from jobmatcher.server.utils.dict_lang_programing import recommendation
 app = Flask(__name__)
 CORS(app)
 
@@ -85,11 +84,7 @@ if __name__ == '__main__':
     print(start_message)
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
 
-    # result = extract_details.extract_location("Tel Aviv C++ Python ")
-    # distance = location.calculate_distance_bing('tel aviv', 'beer sheva')
-
-
-    # result = extract_details.extract_location("Tel Aviv C++ Python ")
-    # print(result)
-
+    # pdfFIle.convertHtmlToDfdFile('https://www.w3schools.com/howto/howto_js_filter_table.asp',
+    #                              'chenyair1617@gmail.com','This is the subject',
+    #                              'This is the subject')
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
