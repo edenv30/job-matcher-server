@@ -2,7 +2,7 @@ from jobmatcher.server.authentication.authentication_api import AuthenticationAp
 from jobmatcher.server.modules.user.user_api import RegisterUserApi,UserUpdateApi,UserSetStusApi
 from jobmatcher.server.modules.user.user_api import SignUserApi
 from jobmatcher.server.modules.user.user_api import UserUploadApi
-from jobmatcher.server.modules.job.job_api import UploadJobApi
+from jobmatcher.server.modules.job.job_api import UploadJobApi,jobsCounter
 from jobmatcher.server.modules.user.user_api import UserPreferencesApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi
@@ -21,6 +21,7 @@ def init_apis(api):
     api.add_resource(UserFindMatchApi, '/api/user/<string:user_id>/svemtchjbs')
     api.add_resource(UserFindMatchWord2vecApi, '/api/user/<string:user_id>/word2vec')
     api.add_resource(UserGetRecommendation, '/api/user/<string:user_id>/recommendation')
+    api.add_resource(jobsCounter,'/api/jobscounter')
 
 
 
