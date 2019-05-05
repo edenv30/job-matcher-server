@@ -130,7 +130,9 @@ class UserUpdateApi(Resource):
         # print(user_id)
         user=User.objects.get(id=user_id)
         # print (user.first_name)
-        return [user.first_name,user.last_name,user.email,user.tags,user.password_hash]
+        # print("user_tags_amount")
+        # print(len(user.tags))
+        return [user.first_name,user.last_name,user.email,len(user.tags),user.tags,user.password_hash]
 
 class UserSetStusApi(Resource):
     def get (self,user_id):
