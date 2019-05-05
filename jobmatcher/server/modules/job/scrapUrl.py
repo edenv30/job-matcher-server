@@ -19,7 +19,7 @@ def scarpUrl():
         print(i)
         web_scrap(urlList[i])
 
-    print(urlList)
+    # print(urlList)
 
 
 def scrape_cities():

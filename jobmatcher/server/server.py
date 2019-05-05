@@ -68,7 +68,7 @@ def scrape_schedule():
     :return:
     """
     # adding new jobs from the web
-    scrapUrl.scarpUrl()
+    # scrapUrl.scarpUrl()
     print('schedule')
 
 

@@ -16,7 +16,7 @@ def init_apis(api):
     api.add_resource(UserUploadApi, '/api/user/<string:user_id>/update')
     api.add_resource(UploadJobApi, '/api/jobs/upload')
     api.add_resource(UserPreferencesApi, '/api/user/<string:user_id>/preferences')
-    api.add_resource(UserFindMatchApi, '/api/user/<string:user_id>/svemtchjbs')
+    # api.add_resource(UserFindMatchApi, '/api/user/<string:user_id>/svemtchjbs')
     api.add_resource(UserFindMatchWord2vecApi, '/api/user/<string:user_id>/word2vec')
 
     # api.add_resource(UserCV, '/api/user/<string:user_id>/cv', '/api/user/<string:user_id>/cv/<string:cv_id>')
