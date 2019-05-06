@@ -25,6 +25,7 @@ from jobmatcher.server.utils.location.location import matchHandler , one_city
 from jobmatcher.server.modules.user.user_api_utils import checkUserFile
 from jobmatcher.server.utils.dict_lang_programing import recommendation
 
+
 class RegisterUserApi(Resource):
     def post(self):
         payload = request.json.get('body')
@@ -49,7 +50,6 @@ class RegisterUserApi(Resource):
         response['token'] = generate_access_token(user).decode('utf-8')
         return response, u.HTTP_CREATED
 
-
 class SignUserApi(Resource):
     def post(self):
         payload = request.json
@@ -62,7 +62,6 @@ class SignUserApi(Resource):
             print(user.email)
             self.find_by_email("test@email.com")
 
-
 class UserApi(Resource):
     @require_authentication
     def put(self, user_id):
@@ -71,7 +70,6 @@ class UserApi(Resource):
         :return:
         """
         payload = request.json
-
 
 class UserUploadApi(Resource):
     @require_authentication
@@ -161,7 +159,6 @@ class UserPreferencesApi(Resource):
         print(user.job_type)
         user.save()
 
-
 class UserFindMatchApi(Resource):
     @require_authentication
     def post(self, user_id):
@@ -205,7 +202,6 @@ class UserFindMatchWord2vecApi(Resource):
                     3434:('server','link',0.87)}
         return response
 
-
 class UserGetRecommendation(Resource):
     @require_authentication
     def post(self, user_id):
@@ -216,10 +212,6 @@ class UserGetRecommendation(Resource):
         print(rec)
 
 import operator
-
-# x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
-# sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
-# print(sorted_x)
 
 class jobsSortBYscore(Resource):
     @require_authentication
@@ -256,17 +248,24 @@ class jobsSortBYlocation(Resource):
         user_location = extract_location(cv_text)
         loc_dict = {}
         jobs_user = user.jobs
-        # to keep the lication of job in dictionary
+        # to keep the location of job in dictionary
         for k,v in jobs_user.items():
             job = Job.objects.get(identifier=k)
             city = one_city(k, user_location)
             loc_dict[k] = city
+
         #sort list of tuples (job_id,city) by order alphabet cities
         sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
+        print(sorted_loc)
         response = {}
         for s in sorted_loc:
+            score = 0
+            for k,v in jobs_user.items():
+                if (s[0]==k):
+                    score = v
+                    break
             job = Job.objects.get(identifier=s[0])
-            response[s[0]] = (job.role_name,job.link,v,s[1])
+            response[s[0]] = (job.role_name,job.link,score,s[1])
         # print(response)
         return response
 
