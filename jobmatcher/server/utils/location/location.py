@@ -39,7 +39,7 @@ def calculate_distance_bing(origin, dest):
     try:
         origin_point = origin_req.json()['resourceSets'][0]['resources'][0]['point']['coordinates']
         dest_point = dest_req.json()['resourceSets'][0]['resources'][0]['point']['coordinates']
-    except Exception: # TODO: in case it doesnt recognize the city - take care!!!
+    except Exception:  # TODO: in case it doesnt recognize the city - take care!!!
         return -1
 
     distance = get_distance(origin_point, dest_point)

@@ -24,6 +24,9 @@ from jobmatcher.server.utils.location.location import matchHandler , one_city
 
 from jobmatcher.server.modules.user.user_api_utils import checkUserFile
 from jobmatcher.server.utils.dict_lang_programing import recommendation
+from jobmatcher.server.utils.location.location import handle_location_match
+from jobmatcher.server.utils.location.location import matchHandler
+
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -146,9 +149,9 @@ class UserSetStusApi(Resource):
 
 class UserPreferencesApi(Resource):
     @require_authentication
-    def post(self,user_id):
-        # changes needed: adding assert, adding try&except,user will be able to load only 1 CV file
-        # taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+    def post(self, user_id):
+        # TODO: adding assert, adding try&except,user will be able to load only 1 CV file
+        # TODO: taking care if user want to delete his current cv file, change method to PUT(instead of POST)
         print("UserPreferencesApi")
         print(user_id)
         payload = request.json.get('body')

@@ -253,3 +253,5 @@ def extract_location(resume_text, match_threshold=90):
             location_matches.append(location)
     return location_matches
 
+
+
