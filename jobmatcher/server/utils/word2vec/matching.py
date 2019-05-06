@@ -7,6 +7,8 @@ from jobmatcher.server.modules.job.job import Job
 from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.utils.location.location import matchHandler
 import pandas as pd
+from jobmatcher.server.utils.nltk.extract_details import extract_type
+
 
 
 #Next, we define a function to parse the documents (CVs) and save the word embeddings as follows:
@@ -122,8 +124,9 @@ def get_list_matching_job(dic):
     job_score = {}
     for k , v in dic.items():
         job = Job.objects.get(identifier=k)
+        j_type = extract_type(job.type)
         j_role = job.role_name
         j_link = job.link
-        job_score[k] =((j_role,j_link,v))
+        job_score[k] =((j_role,j_link,v,j_type))
 
     return job_score

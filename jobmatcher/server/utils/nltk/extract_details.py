@@ -253,5 +253,16 @@ def extract_location(resume_text, match_threshold=90):
             location_matches.append(location)
     return location_matches
 
-
-
+FULL = 'full'
+HALF = ['half','part']
+STUDENT = 'student'
+#get job type as a string and return the type full/part/student and default is full
+def extract_type(job_type):
+    if FULL in job_type: #first because we decide full will be the default if have a job type for full & half we take the full
+        return FULL
+    for i in HALF:
+        if i in job_type:
+            return HALF[0]
+    if STUDENT in job_type:
+        return STUDENT
+    return FULL

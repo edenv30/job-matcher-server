@@ -185,6 +185,7 @@ class UserFindMatchWord2vecApi(Resource):
     @require_authentication
     def post(self, user_id):
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
+        # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
         user = User.objects.get(pk=user_id)
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
@@ -195,17 +196,17 @@ class UserFindMatchWord2vecApi(Resource):
         # for k,v in jobs_id_list.items():
         #     if k not in  user.jobs:
         #         user.jobs[k] = v
-        #
-        #
         # user.save()
         # response = get_list_matching_job(jobs_id_list)
-        #
+        # # print(response)
         # return response
         response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8,True,False),
                     234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9,False,True),
                     222: ('e', 'd',0.7,True,True), 111: ('eee','qweqwee',0.8,False,True),333:('e','e',0.8,True,False), 1212: ('w','w',0.8,True,True),
                     1234: ('w', 'w', 0.8, True, True),1762: ('w','w',0.8,True,True),
-                    444: ('e', 'd', 0.7,False,False), 555: ('eee', 'qweqwee', 0.8,False,True), 666: ('e', 'e', 0.8,True,False), 777: ('wewe', 'w', 0.8,False,False)}
+                    444: ('e', 'd', 0.7,False,False), 555: ('eee', 'qweqwee', 0.8,False,True), 666: ('e', 'e', 0.8,True,False), 777: ('wewe', 'w', 0.8,False,False),
+                    888:('dba man','link',0.9), 999: ('sql man','link',0.9), 1515: ('client side','link', 0.78),
+                    3434:('server','link',0.87)}
         return response
 
 
@@ -224,10 +225,10 @@ import operator
 # sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
 # print(sorted_x)
 
-class jobsFilterBYscore(Resource):
+class jobsSortBYscore(Resource):
     @require_authentication
     def post(self, user_id):
-        print('~~~~~ jobsFilterBYscore ~~~~~')
+        print('~~~~~ jobsSortBYscore ~~~~~')
         user = User.objects.get(pk=user_id)
 
         jobs_user = user.jobs
@@ -248,21 +249,28 @@ class jobsFilterBYscore(Resource):
         # print(response)
         return response
 
-class jobsFilterBYlocation(Resource):
+class jobsSortBYlocation(Resource):
     @require_authentication
     def post(self, user_id):
-        print('~~~~~ jobsFilterBYlocation ~~~~~')
+        print('~~~~~ jobsSortBYlocation ~~~~~')
         user = User.objects.get(pk=user_id)
         cv_text = user.cvs[0].text
-        # TODO: check if in cv find more than one city
+        # TODO: לבדוק האם זה משנה אם הפונקציה שמוצאת עיר אחת לא נופלת אם למשתמש יש רשימת ערים של יותר מעיר אחת
         user_location = []
         user_location = extract_location(cv_text)
-        response = {}
+        loc_dict = {}
         jobs_user = user.jobs
-        for k ,v in jobs_user.items():
+        # to keep the lication of job in dictionary
+        for k,v in jobs_user.items():
             job = Job.objects.get(identifier=k)
-            city = one_city(k,user_location)
-            response[k] = (job.role_name,job.link,v,city)
+            city = one_city(k, user_location)
+            loc_dict[k] = city
+        #sort list of tuples (job_id,city) by order alphabet cities
+        sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
+        response = {}
+        for s in sorted_loc:
+            job = Job.objects.get(identifier=s[0])
+            response[s[0]] = (job.role_name,job.link,v,s[1])
         # print(response)
         return response
 
