@@ -7,8 +7,8 @@ from jobmatcher.server.modules.user.user_api import UserPreferencesApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi
 from jobmatcher.server.modules.user.user_api import UserGetRecommendation
-from jobmatcher.server.modules.user.user_api import jobsFilterBYscore
-from jobmatcher.server.modules.user.user_api import jobsFilterBYlocation
+from jobmatcher.server.modules.user.user_api import jobsSortBYscore
+from jobmatcher.server.modules.user.user_api import jobsSortBYlocation
 
 
 def init_apis(api):
@@ -24,7 +24,7 @@ def init_apis(api):
     api.add_resource(UserFindMatchWord2vecApi, '/api/user/<string:user_id>/word2vec')
     api.add_resource(UserGetRecommendation, '/api/user/<string:user_id>/recommendation')
     api.add_resource(jobsCounter,'/api/jobscounter')
-    api.add_resource(jobsFilterBYscore,'/api/user/<string:user_id>/filterBYscore')
-    api.add_resource(jobsFilterBYlocation,'/api/user/<string:user_id>/filterBYlocation')
+    api.add_resource(jobsSortBYscore,'/api/user/<string:user_id>/sortBYscore')
+    api.add_resource(jobsSortBYlocation,'/api/user/<string:user_id>/sortBYlocation')
 
 
