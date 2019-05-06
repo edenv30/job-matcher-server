@@ -20,7 +20,7 @@ from jobmatcher.server.utils.nltk.extract_details import extract_experience
 from jobmatcher.server.utils.nltk.extract_details import extract_skills
 from jobmatcher.server.utils.nltk.extract_details import extract_location
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-from jobmatcher.server.utils.location.location import matchHandler
+from jobmatcher.server.utils.location.location import matchHandler , one_city
 
 from jobmatcher.server.modules.user.user_api_utils import checkUserFile
 from jobmatcher.server.utils.dict_lang_programing import recommendation
@@ -213,3 +213,54 @@ class UserGetRecommendation(Resource):
         rec = recommendation(user_id)
         print("rec:")
         print(rec)
+
+import operator
+
+# x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+# sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
+# print(sorted_x)
+
+class jobsFilterBYscore(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ jobsFilterBYscore ~~~~~')
+        user = User.objects.get(pk=user_id)
+
+        jobs_user = user.jobs
+
+        # sorted(jobs_user.values(), reverse=True)
+        # score_list = sorted(["{:.3f}".format(v) for k,v in jobs_user.items()],reverse=True)
+        # print(score_list)
+
+        sorted_score = sorted(jobs_user.items(), key=operator.itemgetter(1), reverse=True)
+        # print(sorted_score)
+
+        response = {}
+        for t in sorted_score:
+            # job = t[0]
+            job = Job.objects.get(identifier=t[0])
+            response[t[0]] = (job.role_name, job.link,t[1])
+
+        # print(response)
+        return response
+
+class jobsFilterBYlocation(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ jobsFilterBYlocation ~~~~~')
+        user = User.objects.get(pk=user_id)
+        cv_text = user.cvs[0].text
+        # TODO: check if in cv find more than one city
+        user_location = []
+        user_location = extract_location(cv_text)
+        response = {}
+        jobs_user = user.jobs
+        for k ,v in jobs_user.items():
+            job = Job.objects.get(identifier=k)
+            city = one_city(k,user_location)
+            response[k] = (job.role_name,job.link,v,city)
+        # print(response)
+        return response
+
+
+

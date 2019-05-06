@@ -132,4 +132,35 @@ def matchHandler(job_id, user_location):
     # print(score)
     return score
 
+# getting job id object & user location. find location's match - return city
+def one_city(job_id, user_location):
+    # print("matchHandler FUNCTION")
+    # TODO: add validity checks: if all fields exist, if score = -1 then put error
+    total_distance = []
+    min_distance = 0
+    score = -1
+    job_location = []
 
+    job = Job.objects.get(identifier=job_id)
+    job_location = extract_location(job.location)
+    list_dest = []
+    for x in user_location:
+        for y in job_location:
+            dis = calculate_distance_bing(x, y)
+            total_distance.append(dis)
+            list_dest.append((dis,y))
+
+    if len(total_distance) != 0:
+        min_distance = total_distance[0]
+        for n in total_distance:
+            if n < min_distance:
+                min_distance = n
+    else:
+        min_distance =1000
+
+    for d in list_dest:
+        # print('min_distance')
+        # print(min_distance)
+        # print(d)
+        if min_distance==d[0]:
+            return d[1]
