@@ -24,7 +24,7 @@ from jobmatcher.server.utils.location.location import matchHandler , one_city
 
 from jobmatcher.server.modules.user.user_api_utils import checkUserFile
 from jobmatcher.server.utils.dict_lang_programing import recommendation
-from jobmatcher.server.utils.location.location import handle_location_match
+# from jobmatcher.server.utils.location.location import handle_location_match
 from jobmatcher.server.utils.location.location import matchHandler
 
 
@@ -201,10 +201,11 @@ class UserFindMatchWord2vecApi(Resource):
         # response = get_list_matching_job(jobs_id_list)
         #
         # return response
-        response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8),
-                    234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9),
-                    222: ('e', 'd',0.7), 111: ('eee','qweqwee',0.8),333:('e','e',0.8), 1212: ('w','w',0.8),
-                    444: ('e', 'd', 0.7), 555: ('eee', 'qweqwee', 0.8), 666: ('e', 'e', 0.8), 777: ('wewe', 'w', 0.8)}
+        response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8,True,False),
+                    234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9,False,True),
+                    222: ('e', 'd',0.7,True,True), 111: ('eee','qweqwee',0.8,False,True),333:('e','e',0.8,True,False), 1212: ('w','w',0.8,True,True),
+                    1234: ('w', 'w', 0.8, True, True),1762: ('w','w',0.8,True,True),
+                    444: ('e', 'd', 0.7,False,False), 555: ('eee', 'qweqwee', 0.8,False,True), 666: ('e', 'e', 0.8,True,False), 777: ('wewe', 'w', 0.8,False,False)}
         return response
 
 
