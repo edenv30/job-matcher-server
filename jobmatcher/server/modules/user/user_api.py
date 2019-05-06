@@ -1,32 +1,18 @@
 from flask_restful import Resource
 from flask import request, session
 from mongoengine import NotUniqueError
-import json
-
-from mongoengine import connect
-
 from jobmatcher.server.authentication.authentication import require_authentication
 from jobmatcher.server.authentication.web_token import generate_access_token
-from jobmatcher.server.modules.user.user_schemas import UserSchema
 from jobmatcher.server.utils import utils as u
-
 from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.modules.job.job import Job
-
-# import all nltk - extract fields functions
-from jobmatcher.server.utils.nltk.extract_details import extract_education
-from jobmatcher.server.utils.nltk.extract_details import extract_experience
-from jobmatcher.server.utils.nltk.extract_details import extract_skills
-from jobmatcher.server.utils.nltk.extract_details import extract_location
-from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-from jobmatcher.server.utils.location.location import matchHandler , one_city
-
-from jobmatcher.server.modules.user.user_api_utils import checkUserFile
+from jobmatcher.server.utils.nltk.extract_details import extract_location,extract_type
+from jobmatcher.server.utils.location.location import one_city
 from jobmatcher.server.utils.dict_lang_programing import recommendation
-# from jobmatcher.server.utils.location.location import handle_location_match
 from jobmatcher.server.utils.location.location import matchHandler
-
+from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
+import operator
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -52,7 +38,6 @@ class RegisterUserApi(Resource):
         response['token'] = generate_access_token(user).decode('utf-8')
         return response, u.HTTP_CREATED
 
-
 class SignUserApi(Resource):
     def post(self):
         payload = request.json
@@ -65,7 +50,6 @@ class SignUserApi(Resource):
             print(user.email)
             self.find_by_email("test@email.com")
 
-
 class UserApi(Resource):
     @require_authentication
     def put(self, user_id):
@@ -74,7 +58,6 @@ class UserApi(Resource):
         :return:
         """
         payload = request.json
-
 
 class UserUploadApi(Resource):
     @require_authentication
@@ -164,7 +147,6 @@ class UserPreferencesApi(Resource):
         print(user.job_type)
         user.save()
 
-
 class UserFindMatchApi(Resource):
     @require_authentication
     def post(self, user_id):
@@ -189,26 +171,32 @@ class UserFindMatchWord2vecApi(Resource):
         user = User.objects.get(pk=user_id)
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
-        # for location score
+        #for location score
         # user_location = []
         # user_location = extract_location(cv_text)
         # jobs_id_list = match_jobs2cv(cv_text,user_location)
         # for k,v in jobs_id_list.items():
-        #     if k not in  user.jobs:
+        #     if k not in user.jobs:
+        #         user.favorite[k]=False
+        #         user.sending[k]=False
         #         user.jobs[k] = v
         # user.save()
-        # response = get_list_matching_job(jobs_id_list)
-        # # print(response)
+        # response = get_list_matching_job(jobs_id_list,user_id)
+        # print(response)
         # return response
-        response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8,True,False),
-                    234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9,False,True),
-                    222: ('e', 'd',0.7,True,True), 111: ('eee','qweqwee',0.8,False,True),333:('e','e',0.8,True,False), 1212: ('w','w',0.8,True,True),
-                    1234: ('w', 'w', 0.8, True, True),1762: ('w','w',0.8,True,True),
-                    444: ('e', 'd', 0.7,False,False), 555: ('eee', 'qweqwee', 0.8,False,True), 666: ('e', 'e', 0.8,True,False), 777: ('wewe', 'w', 0.8,False,False),
-                    888:('dba man','link',0.9), 999: ('sql man','link',0.9), 1515: ('client side','link', 0.78),
-                    3434:('server','link',0.87)}
-        return response
 
+
+        # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+        response={}
+        jobs = user.jobs
+
+        for k ,v in jobs.items():
+            print(user.favorite[k])
+            job = Job.objects.get(identifier=k)
+            response[k]=(job.role_name,job.link,v,extract_type(job.type),
+                         user.favorite[k],user.sending[k])
+        print(response)
+        return response
 
 class UserGetRecommendation(Resource):
     @require_authentication
@@ -218,12 +206,6 @@ class UserGetRecommendation(Resource):
         rec = recommendation(user_id)
         print("rec:")
         print(rec)
-
-import operator
-
-# x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
-# sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
-# print(sorted_x)
 
 class jobsSortBYscore(Resource):
     @require_authentication
@@ -274,5 +256,28 @@ class jobsSortBYlocation(Resource):
         # print(response)
         return response
 
+class UpdateFavorite(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.favorite[job_id]==False):
+            user.favorite[job_id]=True
+        else:
+            user.favorite[job_id]=False
+        user.save()
 
-
+class UpdateSending(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.sending[job_id]==False):
+            user.sending[job_id]=True
+        else:
+            user.sending[job_id]=False
+        user.save()
