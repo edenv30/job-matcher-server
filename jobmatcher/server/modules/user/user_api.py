@@ -1,29 +1,18 @@
 from flask_restful import Resource
 from flask import request, session
 from mongoengine import NotUniqueError
-import json
-
-from mongoengine import connect
-
 from jobmatcher.server.authentication.authentication import require_authentication
 from jobmatcher.server.authentication.web_token import generate_access_token
-from jobmatcher.server.modules.user.user_schemas import UserSchema
 from jobmatcher.server.utils import utils as u
-
 from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.modules.job.job import Job
-
-# import all nltk - extract fields functions
-from jobmatcher.server.utils.nltk.extract_details import extract_education
-from jobmatcher.server.utils.nltk.extract_details import extract_experience
-from jobmatcher.server.utils.nltk.extract_details import extract_skills
-from jobmatcher.server.utils.nltk.extract_details import extract_location
-from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-from jobmatcher.server.utils.location.location import matchHandler , one_city
-
-from jobmatcher.server.modules.user.user_api_utils import checkUserFile
+from jobmatcher.server.utils.nltk.extract_details import extract_location,extract_type
+from jobmatcher.server.utils.location.location import one_city
 from jobmatcher.server.utils.dict_lang_programing import recommendation
+from jobmatcher.server.utils.location.location import matchHandler
+from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
+import operator
 
 
 class RegisterUserApi(Resource):
@@ -144,9 +133,9 @@ class UserSetStusApi(Resource):
 
 class UserPreferencesApi(Resource):
     @require_authentication
-    def post(self,user_id):
-        # changes needed: adding assert, adding try&except,user will be able to load only 1 CV file
-        # taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+    def post(self, user_id):
+        # TODO: adding assert, adding try&except,user will be able to load only 1 CV file
+        # TODO: taking care if user want to delete his current cv file, change method to PUT(instead of POST)
         print("UserPreferencesApi")
         print(user_id)
         payload = request.json.get('body')
@@ -183,23 +172,31 @@ class UserFindMatchWord2vecApi(Resource):
         user = User.objects.get(pk=user_id)
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
-        # for location score
+        #for location score
         # user_location = []
         # user_location = extract_location(cv_text)
         # jobs_id_list = match_jobs2cv(cv_text,user_location)
         # for k,v in jobs_id_list.items():
-        #     if k not in  user.jobs:
+        #     if k not in user.jobs:
+        #         user.favorite[k]=False
+        #         user.sending[k]=False
         #         user.jobs[k] = v
         # user.save()
-        # response = get_list_matching_job(jobs_id_list)
-        # # print(response)
+        # response = get_list_matching_job(jobs_id_list,user_id)
+        # print(response)
         # return response
-        response = {123: ('example', 'https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.8),
-                    234: ('Client-side developer','https://www.jobmaster.co.il/jobs/?headcatnum=15&lang=en',0.9),
-                    222: ('e', 'd',0.7), 111: ('eee','qweqwee',0.8),333:('e','e',0.8), 1212: ('w','w',0.8),
-                    444: ('e', 'd', 0.7), 555: ('eee', 'qweqwee', 0.8), 666: ('e', 'e', 0.8), 777: ('wewe', 'w', 0.8),
-                    888:('dba man','link',0.9), 999: ('sql man','link',0.9), 1515: ('client side','link', 0.78),
-                    3434:('server','link',0.87)}
+
+
+        # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+        response={}
+        jobs = user.jobs
+
+        for k ,v in jobs.items():
+            print(user.favorite[k])
+            job = Job.objects.get(identifier=k)
+            response[k]=(job.role_name,job.link,v,extract_type(job.type),
+                         user.favorite[k],user.sending[k])
+        print(response)
         return response
 
 class UserGetRecommendation(Resource):
@@ -269,5 +266,28 @@ class jobsSortBYlocation(Resource):
         # print(response)
         return response
 
+class UpdateFavorite(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.favorite[job_id]==False):
+            user.favorite[job_id]=True
+        else:
+            user.favorite[job_id]=False
+        user.save()
 
-
+class UpdateSending(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.sending[job_id]==False):
+            user.sending[job_id]=True
+        else:
+            user.sending[job_id]=False
+        user.save()
