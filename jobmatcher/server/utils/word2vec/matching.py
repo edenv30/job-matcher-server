@@ -4,9 +4,12 @@ nlp = spacy.load('en_core_web_sm')
 import numpy as np
 from scipy import spatial
 from jobmatcher.server.modules.job.job import Job
+from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.utils.location.location import matchHandler
 import pandas as pd
+from jobmatcher.server.utils.nltk.extract_details import extract_type
+
 
 
 #Next, we define a function to parse the documents (CVs) and save the word embeddings as follows:
@@ -118,12 +121,18 @@ def match_jobs2cv(cv_text , user_location):
     return  jobsss
 
 
-def get_list_matching_job(dic):
+def get_list_matching_job(dic,user_id):
     job_score = {}
+    user = User.objects.get(pk=user_id)
+    jobs = user.jobs
     for k , v in dic.items():
         job = Job.objects.get(identifier=k)
-        j_role = job.role_name
-        j_link = job.link
-        job_score[k] =((j_role,j_link,v))
+        j_type = extract_type(job.type)
+        # j_role = job.role_name
+        #         # j_link = job.link
+        #         # job_score[k] =((j_role,j_link,v,j_type))
+        job = Job.objects.get(identifier=k)
+        job_score[k] = (job.role_name, job.link, v, extract_type(job.type),
+                       user.favorite[k], user.sending[k])
 
     return job_score

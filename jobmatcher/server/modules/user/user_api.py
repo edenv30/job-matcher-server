@@ -1,29 +1,19 @@
 from flask_restful import Resource
 from flask import request, session
 from mongoengine import NotUniqueError
-import json
-
-from mongoengine import connect
-
 from jobmatcher.server.authentication.authentication import require_authentication
 from jobmatcher.server.authentication.web_token import generate_access_token
-from jobmatcher.server.modules.user.user_schemas import UserSchema
 from jobmatcher.server.utils import utils as u
-
 from jobmatcher.server.modules.user.User import User
 from jobmatcher.server.modules.cv.CV import CV
 from jobmatcher.server.modules.job.job import Job
-
-# import all nltk - extract fields functions
-from jobmatcher.server.utils.nltk.extract_details import extract_education
-from jobmatcher.server.utils.nltk.extract_details import extract_experience
-from jobmatcher.server.utils.nltk.extract_details import extract_skills
-from jobmatcher.server.utils.nltk.extract_details import extract_location
-from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-from jobmatcher.server.utils.location.location import matchHandler
-
-from jobmatcher.server.modules.user.user_api_utils import checkUserFile
+from jobmatcher.server.utils.nltk.extract_details import extract_location,extract_type
+from jobmatcher.server.utils.location.location import one_city
 from jobmatcher.server.utils.dict_lang_programing import recommendation
+from jobmatcher.server.utils.location.location import matchHandler
+from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
+import operator
+
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -49,7 +39,6 @@ class RegisterUserApi(Resource):
         response['token'] = generate_access_token(user).decode('utf-8')
         return response, u.HTTP_CREATED
 
-
 class SignUserApi(Resource):
     def post(self):
         payload = request.json
@@ -62,7 +51,6 @@ class SignUserApi(Resource):
             print(user.email)
             self.find_by_email("test@email.com")
 
-
 class UserApi(Resource):
     @require_authentication
     def put(self, user_id):
@@ -71,7 +59,6 @@ class UserApi(Resource):
         :return:
         """
         payload = request.json
-
 
 class UserUploadApi(Resource):
     @require_authentication
@@ -146,9 +133,9 @@ class UserSetStusApi(Resource):
 
 class UserPreferencesApi(Resource):
     @require_authentication
-    def post(self,user_id):
-        # changes needed: adding assert, adding try&except,user will be able to load only 1 CV file
-        # taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+    def post(self, user_id):
+        # TODO: adding assert, adding try&except,user will be able to load only 1 CV file
+        # TODO: taking care if user want to delete his current cv file, change method to PUT(instead of POST)
         print("UserPreferencesApi")
         print(user_id)
         payload = request.json.get('body')
@@ -160,7 +147,6 @@ class UserPreferencesApi(Resource):
         user.job_type = kind
         print(user.job_type)
         user.save()
-
 
 class UserFindMatchApi(Resource):
     @require_authentication
@@ -182,24 +168,36 @@ class UserFindMatchWord2vecApi(Resource):
     @require_authentication
     def post(self, user_id):
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
+        # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
         user = User.objects.get(pk=user_id)
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
-        # for location score
-        user_location = []
-        user_location = extract_location(cv_text)
-        jobs_id_list = match_jobs2cv(cv_text,user_location)
-        for k,v in jobs_id_list.items():
-            if k not in  user.jobs:
-                user.jobs[k] = v
+        #for location score
+        # user_location = []
+        # user_location = extract_location(cv_text)
+        # jobs_id_list = match_jobs2cv(cv_text,user_location)
+        # for k,v in jobs_id_list.items():
+        #     if k not in user.jobs:
+        #         user.favorite[k]=False
+        #         user.sending[k]=False
+        #         user.jobs[k] = v
+        # user.save()
+        # response = get_list_matching_job(jobs_id_list,user_id)
+        # print(response)
+        # return response
 
 
+        # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+        response={}
+        jobs = user.jobs
 
-        user.save()
-        response = get_list_matching_job(jobs_id_list)
-
+        for k ,v in jobs.items():
+            print(user.favorite[k])
+            job = Job.objects.get(identifier=k)
+            response[k]=(job.role_name,job.link,v,extract_type(job.type),
+                         user.favorite[k],user.sending[k])
+        print(response)
         return response
-
 
 class UserGetRecommendation(Resource):
     @require_authentication
@@ -211,3 +209,87 @@ class UserGetRecommendation(Resource):
         # print(rec)
 
         return rec
+
+import operator
+
+class jobsSortBYscore(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ jobsSortBYscore ~~~~~')
+        user = User.objects.get(pk=user_id)
+
+        jobs_user = user.jobs
+
+        # sorted(jobs_user.values(), reverse=True)
+        # score_list = sorted(["{:.3f}".format(v) for k,v in jobs_user.items()],reverse=True)
+        # print(score_list)
+
+        sorted_score = sorted(jobs_user.items(), key=operator.itemgetter(1), reverse=True)
+        # print(sorted_score)
+
+        response = {}
+        for t in sorted_score:
+            # job = t[0]
+            job = Job.objects.get(identifier=t[0])
+            response[t[0]] = (job.role_name, job.link,t[1])
+
+        # print(response)
+        return response
+
+class jobsSortBYlocation(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ jobsSortBYlocation ~~~~~')
+        user = User.objects.get(pk=user_id)
+        cv_text = user.cvs[0].text
+        # TODO: לבדוק האם זה משנה אם הפונקציה שמוצאת עיר אחת לא נופלת אם למשתמש יש רשימת ערים של יותר מעיר אחת
+        user_location = []
+        user_location = extract_location(cv_text)
+        loc_dict = {}
+        jobs_user = user.jobs
+        # to keep the location of job in dictionary
+        for k,v in jobs_user.items():
+            job = Job.objects.get(identifier=k)
+            city = one_city(k, user_location)
+            loc_dict[k] = city
+
+        #sort list of tuples (job_id,city) by order alphabet cities
+        sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
+        print(sorted_loc)
+        response = {}
+        for s in sorted_loc:
+            score = 0
+            for k,v in jobs_user.items():
+                if (s[0]==k):
+                    score = v
+                    break
+            job = Job.objects.get(identifier=s[0])
+            response[s[0]] = (job.role_name,job.link,score,s[1])
+        # print(response)
+        return response
+
+class UpdateFavorite(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.favorite[job_id]==False):
+            user.favorite[job_id]=True
+        else:
+            user.favorite[job_id]=False
+        user.save()
+
+class UpdateSending(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('------ post test ------')
+        payload = request.json.get('body')
+        job_id=payload.get('id')
+        user = User.objects.get(id=user_id)
+        if(user.sending[job_id]==False):
+            user.sending[job_id]=True
+        else:
+            user.sending[job_id]=False
+        user.save()
