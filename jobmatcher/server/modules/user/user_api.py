@@ -205,7 +205,9 @@ class UserGetRecommendation(Resource):
     @require_authentication
     def post(self, user_id):
         print("UserGetRecommendation")
-        rec = {}
+        # rec = []
         rec = recommendation(user_id)
-        print("rec:")
-        print(rec)
+        # print("rec:")
+        # print(rec)
+
+        return rec
