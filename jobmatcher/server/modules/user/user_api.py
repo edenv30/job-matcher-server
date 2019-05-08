@@ -192,7 +192,6 @@ class UserFindMatchWord2vecApi(Resource):
         jobs = user.jobs
 
         for k ,v in jobs.items():
-            print(user.favorite[k])
             job = Job.objects.get(identifier=k)
             response[k]=(job.role_name,job.link,v,extract_type(job.type),
                          user.favorite[k],user.sending[k])
