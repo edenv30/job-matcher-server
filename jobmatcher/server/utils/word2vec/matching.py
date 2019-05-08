@@ -28,7 +28,7 @@ def build_vocab(jobs):
         # if token.tag_ == 'NN' or token.tag_ == 'VB':
         temp.append(token.lemma_)
         vector.append(temp)
-    # adding the skills file and the edcucation to the vocabulary
+    # adding the skills file and the education to the vocabulary
     data = pd.read_csv('utils/nltk/skills.csv')
     skills = nlp(str(data.columns.values))
     for s in skills:

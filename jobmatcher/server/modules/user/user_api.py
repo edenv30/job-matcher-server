@@ -204,10 +204,12 @@ class UserGetRecommendation(Resource):
     @require_authentication
     def post(self, user_id):
         print("UserGetRecommendation")
-        rec = {}
+        # rec = []
         rec = recommendation(user_id)
-        print("rec:")
-        print(rec)
+        # print("rec:")
+        # print(rec)
+
+        return rec
 
 import operator
 
@@ -253,7 +255,7 @@ class jobsSortBYlocation(Resource):
             city = one_city(k, user_location)
             loc_dict[k] = city
 
-        #sort list of tuples (job_id,city) by order alphabet cities
+        #sort list of tuples (job_id,city) by order alphabet citie
         sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
         print(sorted_loc)
         response = {}
