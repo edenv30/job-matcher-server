@@ -28,7 +28,7 @@ def build_vocab(jobs):
         # if token.tag_ == 'NN' or token.tag_ == 'VB':
         temp.append(token.lemma_)
         vector.append(temp)
-    # adding the skills file and the edcucation to the vocabulary
+    # adding the skills file and the education to the vocabulary
     data = pd.read_csv('utils/nltk/skills.csv')
     skills = nlp(str(data.columns.values))
     for s in skills:
@@ -133,6 +133,6 @@ def get_list_matching_job(dic,user_id):
         #         # job_score[k] =((j_role,j_link,v,j_type))
         job = Job.objects.get(identifier=k)
         job_score[k] = (job.role_name, job.link, v, extract_type(job.type),
-                       user.favorite[k], user.sending[k])
+                       user.favorite[k], user.sending[k],user.replay[k])
 
     return job_score

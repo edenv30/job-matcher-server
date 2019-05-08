@@ -173,13 +173,14 @@ class UserFindMatchWord2vecApi(Resource):
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
         #for location score
-        # user_location = []
+        user_location = []
         # user_location = extract_location(cv_text)
         # jobs_id_list = match_jobs2cv(cv_text,user_location)
         # for k,v in jobs_id_list.items():
         #     if k not in user.jobs:
         #         user.favorite[k]=False
         #         user.sending[k]=False
+        #         user.replay[k]=False
         #         user.jobs[k] = v
         # user.save()
         # response = get_list_matching_job(jobs_id_list,user_id)
@@ -194,7 +195,7 @@ class UserFindMatchWord2vecApi(Resource):
         for k ,v in jobs.items():
             job = Job.objects.get(identifier=k)
             response[k]=(job.role_name,job.link,v,extract_type(job.type),
-                         user.favorite[k],user.sending[k])
+                         user.favorite[k],user.sending[k],user.replay[k])
         print(response)
         return response
 
@@ -202,10 +203,12 @@ class UserGetRecommendation(Resource):
     @require_authentication
     def post(self, user_id):
         print("UserGetRecommendation")
-        rec = {}
+        # rec = []
         rec = recommendation(user_id)
-        print("rec:")
-        print(rec)
+        # print("rec:")
+        # print(rec)
+
+        return rec
 
 import operator
 
@@ -228,7 +231,8 @@ class jobsSortBYscore(Resource):
         for t in sorted_score:
             # job = t[0]
             job = Job.objects.get(identifier=t[0])
-            response[t[0]] = (job.role_name, job.link,t[1])
+            response[t[0]] = (job.role_name, job.link,t[1],user.favorite[t[0]],user.sending[t[0]]
+                              ,user.replay[t[0]])
 
         # print(response)
         return response
@@ -250,7 +254,7 @@ class jobsSortBYlocation(Resource):
             city = one_city(k, user_location)
             loc_dict[k] = city
 
-        #sort list of tuples (job_id,city) by order alphabet cities
+        #sort list of tuples (job_id,city) by order alphabet citie
         sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
         print(sorted_loc)
         response = {}
@@ -261,7 +265,8 @@ class jobsSortBYlocation(Resource):
                     score = v
                     break
             job = Job.objects.get(identifier=s[0])
-            response[s[0]] = (job.role_name,job.link,score,s[1])
+            response[s[0]] = (job.role_name,job.link,score,s[1],user.favorite[s[0]],user.sending[s[0]]
+                              ,user.replay[s[0]])
         # print(response)
         return response
 
@@ -289,4 +294,16 @@ class UpdateSending(Resource):
             user.sending[job_id]=True
         else:
             user.sending[job_id]=False
+        user.save()
+
+class UpdateReply(Resource):
+    @require_authentication
+    def post(self, user_id):
+        payload = request.json.get('body')
+        job_id = payload.get('id')
+        user = User.objects.get(id=user_id)
+        if (user.replay[job_id] == False):
+            user.replay[job_id] = True
+        else:
+            user.replay[job_id] = False
         user.save()

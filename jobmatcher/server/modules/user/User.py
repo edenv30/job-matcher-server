@@ -23,6 +23,7 @@ class User(BaseDocument):
     jobs = me.DictField(required=False)
     favorite = me.DictField(required=False)
     sending = me.DictField(required=False)
+    replay = me.DictField(required=False)
     find = me.BooleanField(required=False)
 
     def set_password(self, password):
