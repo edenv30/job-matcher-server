@@ -133,6 +133,6 @@ def get_list_matching_job(dic,user_id):
         #         # job_score[k] =((j_role,j_link,v,j_type))
         job = Job.objects.get(identifier=k)
         job_score[k] = (job.role_name, job.link, v, extract_type(job.type),
-                       user.favorite[k], user.sending[k])
+                       user.favorite[k], user.sending[k],user.replay[k])
 
     return job_score
