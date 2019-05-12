@@ -179,13 +179,14 @@ class UserFindMatchWord2vecApi(Resource):
         user_location = []
         # user_location = extract_location(cv_text)
         # jobs_id_list = match_jobs2cv(cv_text,user_location)
-        # for k,v in jobs_id_list.items():
-        #     if k not in user.jobs:
-        #         user.favorite[k]=False
-        #         user.sending[k]=False
-        #         user.replay[k]=False
-        #         user.jobs[k] = v
-        # user.save()
+        jobs_id_list = {job.identifier: 100 for job in Job.objects}
+        for k,v in jobs_id_list.items():
+            if k not in user.jobs:
+                user.favorite[k]=False
+                user.sending[k]=False
+                user.replay[k]=False
+                user.jobs[k] = v
+        user.save()
         # response = get_list_matching_job(jobs_id_list,user_id)
         # print(response)
         # return response
