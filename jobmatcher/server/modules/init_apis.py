@@ -7,7 +7,7 @@ from jobmatcher.server.modules.user.user_api import UserPreferencesApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi
 from jobmatcher.server.modules.user.user_api import UserGetRecommendation
-from jobmatcher.server.modules.user.user_api import jobsSortBYscore,UpdateSending
+from jobmatcher.server.modules.user.user_api import jobsSortBYscore,UpdateSending,PDFfile
 from jobmatcher.server.modules.user.user_api import jobsSortBYlocation,UpdateFavorite,UpdateReply
 
 
@@ -29,6 +29,6 @@ def init_apis(api):
     api.add_resource(UpdateFavorite,'/api/user/<string:user_id>/UpdateFavorite')
     api.add_resource(UpdateSending, '/api/user/<string:user_id>/UpdateSending')
     api.add_resource(UpdateReply, '/api/user/<string:user_id>/UpdateReply')
-
+    api.add_resource(PDFfile, '/api/user/<string:user_id>/PDFfile')
 
 

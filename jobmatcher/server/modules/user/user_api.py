@@ -11,9 +11,9 @@ from jobmatcher.server.utils.nltk.extract_details import extract_location,extrac
 from jobmatcher.server.utils.location.location import one_city
 from jobmatcher.server.utils.dict_lang_programing import recommendation
 from jobmatcher.server.utils.location.location import matchHandler
+from jobmatcher.server.utils.SOS import pdfFIle
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
 import operator
-
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -106,10 +106,10 @@ class UserUpdateApi(Resource):
         ppost = User.objects.get(email=payload.get('email', None))
         ppost.first_name=user.first_name
         ppost.last_name = user.last_name
-        ppost.password_hash = user.password_hash
+        if(ppost.password_hash!=payload.get('password')):
+            ppost.password_hash = user.password_hash
         ppost.active = user.active
         ppost.tags=user.tags
-        print(ppost.tags)
         ppost.save()
 
     def get (self,user_id):
@@ -147,6 +147,9 @@ class UserPreferencesApi(Resource):
         user.job_type = kind
         print(user.job_type)
         user.save()
+    def get(self,user_id):
+        user = User.objects.get(pk=user_id)
+        return [user.job_type]
 
 class UserFindMatchApi(Resource):
     @require_authentication
@@ -210,8 +213,6 @@ class UserGetRecommendation(Resource):
         # print(rec)
 
         return rec
-
-import operator
 
 class jobsSortBYscore(Resource):
     @require_authentication
@@ -308,3 +309,17 @@ class UpdateReply(Resource):
         else:
             user.replay[job_id] = False
         user.save()
+
+class PDFfile(Resource):
+    def post(self,user_id):
+        print('------PDFfile----')
+        payload = request.json.get('body')
+        url=payload.get('urlFile')
+        user = User.objects.get(id=user_id)
+        # receiver=user.email
+        receiver='chenyair1617@gmail.com'
+        subject= 'This is the subject'
+        message='This is the message'
+        print(url)
+        # print('user',user.email)
+        pdfFIle.convertHtmlToDfdFile(url,receiver,subject,message)

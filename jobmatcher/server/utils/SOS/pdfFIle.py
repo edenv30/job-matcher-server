@@ -16,7 +16,7 @@ def convertHtmlToDfdFile(urlFile,receiver,subject,message):
 
     # Setup the attachment
     filename = subject+".pdf"
-    attachment = pdfkit.from_url(urlFile, False)
+    attachment = pdfkit.from_url(urlFile,False)
     part = MIMEBase('application', 'octet-stream')
     part.set_payload(attachment)
     encoders.encode_base64(part)
@@ -26,8 +26,8 @@ def convertHtmlToDfdFile(urlFile,receiver,subject,message):
     msg.attach(part)
 
 
-    server = smtplib.SMTP(config.MAIL_SERVER)
-    server.starttls()
+    server = smtplib.SMTP_SSL(config.MAIL_SERVER,config.MAIL_PORT)
+    # server.starttls()
     server.login(config.MAIL_SENDER, config.MAIL_PASSWORD)
     text = msg.as_string()  # You now need to convert the MIMEMultipart object to a string to send
     server.sendmail(config.MAIL_SENDER, receiver, text)
