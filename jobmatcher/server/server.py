@@ -6,7 +6,6 @@ from flask_restful import Api
 from flask_mail import Mail
 
 
-
 from jobmatcher.server.db import db
 from jobmatcher.server.utils import utils as u
 from jobmatcher.config import config
