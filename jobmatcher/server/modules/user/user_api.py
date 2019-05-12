@@ -174,30 +174,30 @@ class UserFindMatchWord2vecApi(Resource):
         cv_text = user.cvs[0].text
         #for location score
         user_location = []
-        # user_location = extract_location(cv_text)
-        # jobs_id_list = match_jobs2cv(cv_text,user_location)
-        # for k,v in jobs_id_list.items():
-        #     if k not in user.jobs:
-        #         user.favorite[k]=False
-        #         user.sending[k]=False
-        #         user.replay[k]=False
-        #         user.jobs[k] = v
-        # user.save()
-        # response = get_list_matching_job(jobs_id_list,user_id)
-        # print(response)
-        # return response
-
-
-        # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
-        response={}
-        jobs = user.jobs
-
-        for k ,v in jobs.items():
-            job = Job.objects.get(identifier=k)
-            response[k]=(job.role_name,job.link,v,extract_type(job.type),
-                         user.favorite[k],user.sending[k],user.replay[k])
+        user_location = extract_location(cv_text)
+        jobs_id_list = match_jobs2cv(cv_text,user_location)
+        for k,v in jobs_id_list.items():
+            if k not in user.jobs:
+                user.favorite[k]=False
+                user.sending[k]=False
+                user.replay[k]=False
+                user.jobs[k] = v
+        user.save()
+        response = get_list_matching_job(jobs_id_list,user_id)
         print(response)
         return response
+
+
+        # # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+        # response={}
+        # jobs = user.jobs
+        #
+        # for k ,v in jobs.items():
+        #     job = Job.objects.get(identifier=k)
+        #     response[k]=(job.role_name,job.link,v,extract_type(job.type),
+        #                  user.favorite[k],user.sending[k],user.replay[k])
+        # print(response)
+        # return response
 
 class UserGetRecommendation(Resource):
     @require_authentication
