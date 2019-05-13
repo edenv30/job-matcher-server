@@ -5,7 +5,7 @@ from jobmatcher.server.modules.user.user_api import UserUploadApi
 from jobmatcher.server.modules.job.job_api import UploadJobApi,jobsCounter
 from jobmatcher.server.modules.user.user_api import UserPreferencesApi
 from jobmatcher.server.modules.user.user_api import UserFindMatchApi
-from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi
+from jobmatcher.server.modules.user.user_api import UserFindMatchWord2vecApi,UserFindMatchWord2vecApi2
 from jobmatcher.server.modules.user.user_api import UserGetRecommendation
 from jobmatcher.server.modules.user.user_api import jobsSortBYscore,UpdateSending,PDFfile
 from jobmatcher.server.modules.user.user_api import jobsSortBYlocation,UpdateFavorite,UpdateReply
@@ -22,6 +22,7 @@ def init_apis(api):
     api.add_resource(UserPreferencesApi, '/api/user/<string:user_id>/preferences')
     # api.add_resource(UserFindMatchApi, '/api/user/<string:user_id>/svemtchjbs')
     api.add_resource(UserFindMatchWord2vecApi, '/api/user/<string:user_id>/word2vec')
+    api.add_resource(UserFindMatchWord2vecApi2, '/api/user/<string:user_id>/word2vec2')
     api.add_resource(UserGetRecommendation, '/api/user/<string:user_id>/recommendation')
     api.add_resource(jobsCounter,'/api/jobscounter')
     api.add_resource(jobsSortBYscore,'/api/user/<string:user_id>/sortBYscore')
