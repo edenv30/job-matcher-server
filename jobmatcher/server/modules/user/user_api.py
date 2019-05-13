@@ -13,7 +13,9 @@ from jobmatcher.server.utils.dict_lang_programing import recommendation
 from jobmatcher.server.utils.location.location import matchHandler
 from jobmatcher.server.utils.SOS import pdfFIle
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
+from jobmatcher.server.modules.user.user_api_utils import findMatchWord2vec
 import operator, datetime
+
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -218,15 +220,16 @@ class jobsSortBYscore(Resource):
     def post(self, user_id):
         print('~~~~~ jobsSortBYscore ~~~~~')
         user = User.objects.get(pk=user_id)
-
-        jobs_user = user.jobs
-
+        if len(user.cvs)==0:
+            # print('len(user.cvs)', len(user.cvs))
+            return None
+        findMatchWord2vec(user_id)
         # sorted(jobs_user.values(), reverse=True)
         # score_list = sorted(["{:.3f}".format(v) for k,v in jobs_user.items()],reverse=True)
-        # print(score_list)
-
+        jobs_user = user.jobs
+        # print('jobs_user: ', jobs_user)
         sorted_score = sorted(jobs_user.items(), key=operator.itemgetter(1), reverse=True)
-        # print(sorted_score)
+        # print('sorted_score: ',sorted_score)
 
         response = {}
         for t in sorted_score:
@@ -243,21 +246,23 @@ class jobsSortBYlocation(Resource):
     def post(self, user_id):
         print('~~~~~ jobsSortBYlocation ~~~~~')
         user = User.objects.get(pk=user_id)
+        if len(user.cvs)==0:
+            return None
+        findMatchWord2vec(user_id)
         cv_text = user.cvs[0].text
         # TODO: לבדוק האם זה משנה אם הפונקציה שמוצאת עיר אחת לא נופלת אם למשתמש יש רשימת ערים של יותר מעיר אחת
-        user_location = []
         user_location = extract_location(cv_text)
         loc_dict = {}
         jobs_user = user.jobs
+        # print('jobs_user: ', jobs_user)
         # to keep the location of job in dictionary
         for k,v in jobs_user.items():
-            job = Job.objects.get(identifier=k)
+            # job = Job.objects.get(identifier=k)
             city = one_city(k, user_location)
             loc_dict[k] = city
-
         #sort list of tuples (job_id,city) by order alphabet citie
         sorted_loc = sorted(loc_dict.items(), key=operator.itemgetter(1))
-        print(sorted_loc)
+        # print('sorted_loc: ', sorted_loc)
         response = {}
         for s in sorted_loc:
             score = 0
@@ -297,6 +302,8 @@ class UpdateSending(Resource):
             user.sendingDate[job_id] = datetime.datetime.today()
         else:
             user.sending[job_id]=False
+            if job_id in user.sendingDate:
+                user.sendingDate.pop(job_id, None)
         user.save()
 
 class UpdateReply(Resource):
@@ -310,6 +317,8 @@ class UpdateReply(Resource):
             user.replyDate[job_id] = datetime.datetime.today()
         else:
             user.replay[job_id] = False
+            if job_id in user.replyDate:
+                user.replyDate.pop(job_id, None)
         user.save()
 
 class UserTimeLine(Resource):
