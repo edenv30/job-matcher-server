@@ -175,34 +175,37 @@ class UserFindMatchWord2vecApi(Resource):
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
         # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
         user = User.objects.get(pk=user_id)
-        cv_id = user.cvs[0].id
-        cv_text = user.cvs[0].text
-        #for location score
-        user_location = []
-        user_location = extract_location(cv_text)
-        jobs_id_list = match_jobs2cv(cv_text,user_location)
-        for k,v in jobs_id_list.items():
-            if k not in user.jobs:
-                user.favorite[k]=False
-                user.sending[k]=False
-                user.replay[k]=False
-                user.jobs[k] = v
-        user.save()
-        response = get_list_matching_job(jobs_id_list,user_id)
-        print(response)
-        return response
+        # if len(user.cvs) == 0:
+        #     # print('len(user.cvs)')
+        #     return None
+        # cv_id = user.cvs[0].id
+        # cv_text = user.cvs[0].text
+        # #for location score
+        # user_location = []
+        # user_location = extract_location(cv_text)
+        # jobs_id_list = match_jobs2cv(cv_text,user_location)
+        # for k,v in jobs_id_list.items():
+        #     if k not in user.jobs:
+        #         user.favorite[k]=False
+        #         user.sending[k]=False
+        #         user.replay[k]=False
+        #         user.jobs[k] = v
+        # user.save()
+        # response = get_list_matching_job(jobs_id_list,user_id)
+        # print(response)
+        # return response
 
 
         # # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
-        # response={}
-        # jobs = user.jobs
-        #
-        # for k ,v in jobs.items():
-        #     job = Job.objects.get(identifier=k)
-        #     response[k]=(job.role_name,job.link,v,extract_type(job.type),
-        #                  user.favorite[k],user.sending[k],user.replay[k])
-        # print(response)
-        # return response
+        response={}
+        jobs = user.jobs
+
+        for k ,v in jobs.items():
+            job = Job.objects.get(identifier=k)
+            response[k]=(job.role_name,job.link,v,extract_type(job.type),
+                         user.favorite[k],user.sending[k],user.replay[k])
+        print(response)
+        return response
 
 class UserGetRecommendation(Resource):
     @require_authentication
