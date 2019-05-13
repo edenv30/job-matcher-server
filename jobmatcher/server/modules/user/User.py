@@ -25,7 +25,8 @@ class User(BaseDocument):
     sending = me.DictField(required=False)
     replay = me.DictField(required=False)
     find = me.BooleanField(required=False)
-
+    sendingDate = me.DictField(required=False)
+    replyDate = me.DictField(required=False)
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

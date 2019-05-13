@@ -12,7 +12,7 @@ from jobmatcher.server.utils.location.location import one_city
 from jobmatcher.server.utils.dict_lang_programing import recommendation
 from jobmatcher.server.utils.location.location import matchHandler
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-import operator
+import operator, datetime
 
 
 class RegisterUserApi(Resource):
@@ -210,8 +210,6 @@ class UserGetRecommendation(Resource):
 
         return rec
 
-import operator
-
 class jobsSortBYscore(Resource):
     @require_authentication
     def post(self, user_id):
@@ -292,6 +290,8 @@ class UpdateSending(Resource):
         user = User.objects.get(id=user_id)
         if(user.sending[job_id]==False):
             user.sending[job_id]=True
+            # user.sendingDate[job_id]=datetime.datetime.now()
+            user.sendingDate[job_id] = datetime.datetime.today()
         else:
             user.sending[job_id]=False
         user.save()
@@ -304,6 +304,42 @@ class UpdateReply(Resource):
         user = User.objects.get(id=user_id)
         if (user.replay[job_id] == False):
             user.replay[job_id] = True
+            user.replyDate[job_id] = datetime.datetime.today()
         else:
             user.replay[job_id] = False
         user.save()
+
+class UserTimeLine(Resource):
+    @require_authentication
+    def post(self, user_id):
+        print('~~~~~ UserTimeLine ~~~~~')
+        user = User.objects.get(id=user_id)
+        response = {}
+        dates ={}
+        #  keep in dictionary key by date from sending dictionary
+        for job in user.sendingDate:
+            d = user.sendingDate[job].strftime("%d/%m/%Y")
+            dic = {}
+            dates[d] = []
+            j = Job.objects.get(identifier=job)
+            dic[job]=j.role_name, 'SENT: CVs were sent to the employer'
+            dates[d].append(dic)
+        #  keep in dictionary key by date from reply dictionary
+        for job in user.replyDate:
+            d = user.replyDate[job].strftime("%d/%m/%Y")
+            dic = {}
+            j = Job.objects.get(identifier=job)
+            dic[job]=j.role_name,'REPLY: An employer came back'
+            if d not in dates:
+                dates[d] = []
+            dates[d].append(dic)
+        # to order by most new updated and return only 3 dates
+        i=0
+        for date in reversed(sorted(dates.keys())):
+            i+=1
+            response[date] = dates[date]
+            if i==3:
+                break;
+
+        # print(response)
+        return response
