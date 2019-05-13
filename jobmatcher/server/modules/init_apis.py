@@ -30,7 +30,6 @@ def init_apis(api):
     api.add_resource(UpdateSending, '/api/user/<string:user_id>/UpdateSending')
     api.add_resource(UpdateReply, '/api/user/<string:user_id>/UpdateReply')
     api.add_resource(UserTimeLine, '/api/user/<string:user_id>/UserTimeLine')
-
     api.add_resource(PDFfile, '/api/user/<string:user_id>/PDFfile')
 
 

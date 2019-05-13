@@ -173,6 +173,9 @@ class UserFindMatchWord2vecApi(Resource):
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
         # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
         user = User.objects.get(pk=user_id)
+        if len(user.cvs) == 0:
+            # print('len(user.cvs)')
+            return None
         cv_id = user.cvs[0].id
         cv_text = user.cvs[0].text
         #for location score
