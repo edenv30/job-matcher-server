@@ -20,6 +20,7 @@ from jobmatcher.server.utils.nltk import job_extract, extract_details
 from jobmatcher.server.utils.location import location
 from jobmatcher.server.utils.word2vec import matching
 from jobmatcher.server.utils.dict_lang_programing import recommendation
+
 app = Flask(__name__)
 CORS(app)
 

@@ -31,6 +31,7 @@ def web_scrap(urlJob):
                 jlinkPopUp = 'https://www.jobmaster.co.il/jobs/checknum.asp?flagShare=' + str(num) + '&lang=en'
             else:
                 jlinkPopUp = 'No contact - no link'
+                break;
             jSalary = translateH2E(job.find(class_='jobSalary').get_text())
             # JDR job D - description R - requirements
             temp = job.find_all(class_='JobItemSubHeader')  # for checkin if Description or Requirements

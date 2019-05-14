@@ -12,7 +12,7 @@ class User(BaseDocument):
     last_name = me.StringField(required=True)
     email = me.StringField(unique=True, required=True)
     password_hash = me.StringField(required=True)
-    job_type = me.StringField(required=False)
+    job_type = me.StringField(required=True,default='none')
     active = me.BooleanField(required=True, default=True)
 
     tags = me.ListField(me.StringField())
@@ -25,7 +25,8 @@ class User(BaseDocument):
     sending = me.DictField(required=False)
     replay = me.DictField(required=False)
     find = me.BooleanField(required=False)
-
+    sendingDate = me.DictField(required=False)
+    replyDate = me.DictField(required=False)
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

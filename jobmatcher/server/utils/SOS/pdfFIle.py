@@ -48,7 +48,6 @@ def makeUserJobsPdf(user):
     send_mail(subject, [user.email], body=body, html=None, attachments=['%s/%s' % (os.getcwd(), output_filename)])
 
 def convertHtmlToDfdFile(urlFile,receiver,subject,message):
-
     msg = MIMEMultipart()
     msg['From'] = config.MAIL_SENDER
     msg['To'] = receiver
