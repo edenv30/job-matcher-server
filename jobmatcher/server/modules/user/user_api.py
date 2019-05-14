@@ -177,9 +177,8 @@ class UserFindMatchWord2vecApi(Resource):
         cv_text = user.cvs[0].text
         #for location score
         user_location = []
-        # user_location = extract_location(cv_text)
-        # jobs_id_list = match_jobs2cv(cv_text,user_location)
-        jobs_id_list = {job.identifier: 100 for job in Job.objects}
+        user_location = extract_location(cv_text)
+        jobs_id_list = match_jobs2cv(cv_text,user_location)
         for k,v in jobs_id_list.items():
             if k not in user.jobs:
                 user.favorite[k]=False
@@ -191,9 +190,8 @@ class UserFindMatchWord2vecApi(Resource):
         # print(response)
         # return response
 
-
-        # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
-        response={}
+        # TODO: לקטע קוד האמיתי זה ההערות הראשונות
+        response = {}
         jobs = user.jobs
 
         for k ,v in jobs.items():
