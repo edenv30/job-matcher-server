@@ -405,10 +405,16 @@ class PDFfile(Resource):
         payload = request.json.get('body')
         url=payload.get('urlFile')
         user = User.objects.get(id=user_id)
-        # receiver=user.email
-        receiver='chenyair1617@gmail.com'
+        receiver = user.email
+        print("receiver: " + receiver)
+        # receiver='chenyair1617@gmail.com'
         subject= 'This is the subject'
         message='This is the message'
         print(url)
         # print('user',user.email)
-        pdfFIle.convertHtmlToDfdFile(url,receiver,subject,message)
+
+        pdfFIle.send_user_mail(user)
+
+
+
+        # pdfFIle.makeUserJobsPdf(user)
