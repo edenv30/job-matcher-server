@@ -192,7 +192,7 @@ class UserFindMatchWord2vecApi(Resource):
                 user.jobs[k] = v
         user.save()
         response = get_list_matching_job(jobs_id_list,user_id)
-        print(response)
+        # print(response)
         return response
 
 
@@ -279,7 +279,7 @@ class jobsSortBYscore(Resource):
             response[t[0]] = (job.role_name, job.link,t[1],user.favorite[t[0]],user.sending[t[0]]
                               ,user.replay[t[0]])
 
-        # print(response)
+        print(response)
         return response
 
 class jobsSortBYlocation(Resource):
@@ -369,7 +369,6 @@ class UserTimeLine(Resource):
         user = User.objects.get(id=user_id)
         response = {}
         dates ={}
-        print('user.sendingDate ', user.sendingDate)
         #  keep in dictionary key by date from sending dictionary
         for job in user.sendingDate:
             d = user.sendingDate[job].strftime("%d/%m/%Y")
@@ -396,7 +395,7 @@ class UserTimeLine(Resource):
             if i==3:
                 break;
 
-        print(response)
+        # print(response)
         return response
 
 class PDFfile(Resource):
