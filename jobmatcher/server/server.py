@@ -12,7 +12,6 @@ from jobmatcher.server.utils import utils as u
 from jobmatcher.config import config
 from jobmatcher.server.modules.init_apis import init_apis
 from jobmatcher.server.modules.job import scrapUrl
-
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from jobmatcher.server.utils.SOS import locationExtract , job_nltk,pdfFIle
