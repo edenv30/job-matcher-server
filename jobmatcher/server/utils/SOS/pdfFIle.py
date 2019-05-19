@@ -14,14 +14,17 @@ from jobmatcher.server.utils.mail_utils import send_mail
 
 def makeJobHtml(job):
     return """
-        <div>
-            <div>Description %s</div>
+        <div class="user-match">
+            <div>Role: %s</div>
+            <div>Location: %s</div>
+            <div>Description: %s</div>
+            <br/>
         </div>
-    """ % (job.description)
+    """ % (job.role_name, job.location ,job.description)
 
 def makeUserInfoHtml(user):
     return """
-        <div>%s</div>
+        <div><u>%s</u></div><br/>
     """ % (user.fullname)
 
 def makeUserJobsPdf(user):
@@ -36,8 +39,10 @@ def makeUserJobsPdf(user):
                 <meta http-equiv="content-type" content="text/html"; charset="utf-8">
             </head>
             <body>
-                %s
-                <div>%s</div>
+                <div class="content">
+                    <div class="user-info">%s</div>
+                    <div class="user-matches">%s</div>
+                </div>
             </body>
         </html>
     """ % (makeUserInfoHtml(user), ''.join([makeJobHtml(job) for job in jobs]))
@@ -51,7 +56,7 @@ def makeUserJobsPdf(user):
     send_mail(subject, [user.email], body=body, html=None, attachments=['%s/%s' % (os.getcwd(), output_filename)])
 
 
-
+# TODO: add to func - try&catch later
 def send_user_mail(user):
     print("####### mail_test() #####")
     jobs = Job.objects.filter(identifier__in=(user.jobs.keys()))
@@ -73,8 +78,10 @@ def send_user_mail(user):
                     <meta http-equiv="content-type" content="text/html"; charset="utf-8">
                 </head>
                 <body>
-                    %s
-                    <div>%s</div>
+                    <div class="content">
+                        <div class="user-info">%s</div>
+                        <div class="user-matches">%s</div>
+                    </div>
                 </body>
             </html>
         """ % (makeUserInfoHtml(user), ''.join([makeJobHtml(job) for job in jobs]))
@@ -84,21 +91,23 @@ def send_user_mail(user):
     pdfkit.from_string(html, output_filename, css=['%s/utils/SOS/pdfFileStyle.css' % os.getcwd()], options=options)
 
     filename = "temp.pdf"
-    attachment = open("C:\\Users\\Tal\\PycharmProjects\\server\\jobmatcher\\server\\temp.pdf", "rb")
+    attachment = open('temp.pdf', "rb")
 
-    p = MIMEBase('application' , 'octet-stream')
-    p.set_payload((attachment).read())
+    p = MIMEBase('application', 'octet-stream')
+    p.set_payload(attachment.read())
     encoders.encode_base64(p)
     p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
     msg.attach(p)
 
     server = smtplib.SMTP_SSL(config.MAIL_SERVER, config.MAIL_PORT)
-    # server.starttls()
     server.login(config.MAIL_SENDER, config.MAIL_PASSWORD)
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
 
+    # close the attachment and remove the file
+    attachment.close()
+    os.remove("temp.pdf")
 
 
 
