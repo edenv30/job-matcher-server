@@ -12,3 +12,14 @@ body {
     border-bottom: 1px solid #a1a39d;
     padding: 15px 10px;
 }
+
+.logo-title {
+    color: brown;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.type-title {
+    font-size: 30px;
+    color: black;
+}
