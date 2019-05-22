@@ -73,15 +73,10 @@ class UserUploadApi(Resource):
 
         payload = request.json
 
-        # if not (checkUserFile(user_id)):
-        #     print("User cannot upload file !!!!!!!!!!!!!!!!!!")
-        #     return False
-
-
-
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
         cv = CV(
+            file=payload.get('body')['file_name'],
             text=payload.get('data'),
             user=user.to_dbref()
         )
@@ -95,7 +90,42 @@ class UserUploadApi(Resource):
     def get(self, user_id):
         user = User.objects.get(pk=user_id)
         cv_length = len(user.cvs)
-        return cv_length
+        cv_file_name = user.cvs[0].file
+
+        return [cv_length, cv_file_name]
+
+    @require_authentication
+    def delete(self, user_id):
+        try:
+            assert user_id == session['user']['id']
+            user = User.objects.get(pk=user_id)
+            user_cvs = user.cvs[0].id
+            print("user_cvs: ", user_cvs)
+
+            # cv = CV.objects.get(pk=user_cvs)
+            # print("cv.file: ", cv.file)
+            # if cv.delete():
+            #     print("cv DELETED!!!")
+
+            print("$$$ ", user.cvs[0].id)
+
+            print("$$$ ", user.cvs[0].file)
+
+            # user.cvs.append(cv.to_dbref())
+            # user.save()
+
+
+
+
+
+
+
+
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+
+
+
 
 class UserUpdateApi(Resource):
 
