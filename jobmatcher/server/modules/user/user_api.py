@@ -375,6 +375,7 @@ class UserTimeLine(Resource):
             dic = {}
             if d not in dates:
                 dates[d] = []
+            # TODO: לעשות בדיקה אם אין משרות , תנאי
             j = Job.objects.get(identifier=job)
             dic[job]=j.role_name, 'SENT: CVs were sent to the employer'
             dates[d].append(dic)
