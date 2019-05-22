@@ -91,6 +91,12 @@ class UserUploadApi(Resource):
         user.save()
         return {}, u.HTTP_CREATED
 
+    @require_authentication
+    def get(self, user_id):
+        user = User.objects.get(pk=user_id)
+        cv_length = len(user.cvs)
+        return cv_length
+
 class UserUpdateApi(Resource):
 
     def post(self, user_id):
@@ -401,14 +407,41 @@ class UserTimeLine(Resource):
 
 class PDFfile(Resource):
     def post(self,user_id):
-        print('------PDFfile----')
+        # print('------PDFfile----')
         payload = request.json.get('body')
-        url=payload.get('urlFile')
+
+        # print("payload - selectedFilter: ", payload['selectedFilter'])
         user = User.objects.get(id=user_id)
-        # receiver=user.email
-        receiver='chenyair1617@gmail.com'
-        subject= 'This is the subject'
-        message='This is the message'
-        print(url)
-        # print('user',user.email)
-        pdfFIle.convertHtmlToDfdFile(url,receiver,subject,message)
+
+        filter_dict = {
+            "0": "showAll",
+            "1": "full",
+            "2": "Half",
+            "3": "student",
+            "4": "sending",
+            "5": "favorite",
+            "6": "reply"
+
+        }
+
+        choice = str(payload['selectedFilter'])
+        result = filter_dict[choice]
+
+
+
+
+        # url=payload.get('urlFile')
+        # receiver = user.email
+        # print("receiver: " + receiver)
+
+        # subject= 'This is the subject'
+        # message='This is the message'
+        # print(url)
+
+        pdfFIle.send_user_mail(user, result)
+
+
+
+
+
+

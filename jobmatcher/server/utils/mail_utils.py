@@ -6,9 +6,11 @@ from flask_mail import Message
 
 
 def send_mail(subject, recipients, body=None, html=None, attachments=[]):
+    print(" ****** send_mail ******")
     mail = current_app.extensions['mail']
     msg = Message(sender=config.MAIL_SENDER, subject=subject, recipients=recipients, html=html, body=body)
     mimes = MimeTypes()
+
     for file in attachments:
         path_ = file
         with current_app.open_resource(path_) as fp:
