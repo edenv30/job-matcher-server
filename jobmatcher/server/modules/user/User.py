@@ -17,7 +17,9 @@ class User(BaseDocument):
 
     tags = me.ListField(me.StringField())
 
-    cvs = me.ListField(me.ReferenceField('CV'))
+    # cvs = me.ListField(me.ReferenceField('CV'))
+    cvs = me.ListField(me.ReferenceField('CV', reverse_delete_rule=me.PULL))
+
     #matches = me.ListField(me.ReferenceField('JOB'))
 
     jobs = me.DictField(required=False)
