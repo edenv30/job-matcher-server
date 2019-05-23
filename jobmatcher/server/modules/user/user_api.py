@@ -103,6 +103,9 @@ class UserUploadApi(Resource):
             print("user_cvs: ", user_cvs)
 
             # cv = CV.objects.get(pk=user_cvs)
+            # cv.delete()
+
+            # cv = CV.objects.get(pk=user_cvs)
             # print("cv.file: ", cv.file)
             # if cv.delete():
             #     print("cv DELETED!!!")
