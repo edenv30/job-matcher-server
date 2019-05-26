@@ -73,15 +73,16 @@ class UserUploadApi(Resource):
 
         payload = request.json
 
-        # if not (checkUserFile(user_id)):
-        #     print("User cannot upload file !!!!!!!!!!!!!!!!!!")
-        #     return False
-
-
-
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
+        ##############
+        if user.cvs != []:
+            print('Already exist a cv file, first delete')
+            # already have a cv file
+            return 'cv' , u.HTTP_CREATED
+        ##############
         cv = CV(
+            file=payload.get('body')['file_name'],
             text=payload.get('data'),
             user=user.to_dbref()
         )
@@ -90,6 +91,60 @@ class UserUploadApi(Resource):
         user.cvs.append(cv.to_dbref())
         user.save()
         return {}, u.HTTP_CREATED
+
+    @require_authentication
+    def get(self, user_id):
+        user = User.objects.get(pk=user_id)
+        cv_length = len(user.cvs)
+        if user.cvs == []:
+            return 'failed'
+        cv_file_name = user.cvs[0].file
+
+        return [cv_length, cv_file_name]
+
+    @require_authentication
+    def delete(self, user_id):
+        try:
+            assert user_id == session['user']['id']
+            user = User.objects.get(pk=user_id)
+            if user.cvs == []:
+                return 'failed'
+            user_cvs = user.cvs[0].id
+            print("user_cvs: ", user_cvs)
+
+            cv = CV.objects.get(pk=user_cvs)
+            print("cv.file: ", cv.file)
+            cv.delete()
+            user.save()
+            # print(' user.cvs == []',  User.objects.get(pk=user_id).cvs == [])
+            # print('cv not in CV.objects', cv not in CV.objects())
+            # delete cheking
+            if cv not in CV.objects():
+                return 'success'
+            else:
+                return 'error'
+            # if cv.delete():
+            #     print("cv DELETED!!!")
+
+            # print("$$$ ", user.cvs[0].id)
+            #
+            # print("$$$ ", user.cvs[0].file)
+            # for cv in user.cvs:
+            #     if cv.id == user_cvs:
+            #         print('cv ',cv.id)
+
+            # user.cvs.append(cv.to_dbref())
+            # user.save()
+
+
+
+
+
+
+
+
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
 class UserUpdateApi(Resource):
 
@@ -375,6 +430,7 @@ class UserTimeLine(Resource):
             dic = {}
             if d not in dates:
                 dates[d] = []
+            # TODO: לעשות בדיקה אם אין משרות , תנאי
             j = Job.objects.get(identifier=job)
             dic[job]=j.role_name, 'SENT: CVs were sent to the employer'
             dates[d].append(dic)
@@ -400,14 +456,41 @@ class UserTimeLine(Resource):
 
 class PDFfile(Resource):
     def post(self,user_id):
-        print('------PDFfile----')
+        # print('------PDFfile----')
         payload = request.json.get('body')
-        url=payload.get('urlFile')
+
+        # print("payload - selectedFilter: ", payload['selectedFilter'])
         user = User.objects.get(id=user_id)
-        # receiver=user.email
-        receiver='chenyair1617@gmail.com'
-        subject= 'This is the subject'
-        message='This is the message'
-        print(url)
-        # print('user',user.email)
-        pdfFIle.convertHtmlToDfdFile(url,receiver,subject,message)
+
+        filter_dict = {
+            "0": "showAll",
+            "1": "full",
+            "2": "Half",
+            "3": "student",
+            "4": "sending",
+            "5": "favorite",
+            "6": "reply"
+
+        }
+
+        choice = str(payload['selectedFilter'])
+        result = filter_dict[choice]
+
+
+
+
+        # url=payload.get('urlFile')
+        # receiver = user.email
+        # print("receiver: " + receiver)
+
+        # subject= 'This is the subject'
+        # message='This is the message'
+        # print(url)
+
+        pdfFIle.send_user_mail(user, result)
+
+
+
+
+
+
