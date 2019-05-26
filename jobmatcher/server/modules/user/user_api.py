@@ -489,8 +489,18 @@ class PDFfile(Resource):
 
         pdfFIle.send_user_mail(user, result)
 
+class RegistersUserCounter(Resource):
+    def get(self):
+        print('~~~~~ In func GET in RegistersUserCounter ~~~~~')
+        return len(User.objects)
 
-
-
+class UsersFindJobCounter(Resource):
+    def get(self):
+        print('~~~~~ In func GET in UsersFindJobCounter ~~~~~')
+        counter=0
+        for i in User.objects():
+            if i.find:
+                counter=counter+1
+        return counter
 
 
