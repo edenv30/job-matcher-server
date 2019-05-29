@@ -76,6 +76,8 @@ trending = {
 def recommendation(user_id):
     print("RECOMMENDATION")
     user = User.objects.get(pk=user_id)
+    if len(user.cvs)==0:
+        return 'Faild'
     user_tags = user.tags
     print("user_tags:")
     print(user_tags)

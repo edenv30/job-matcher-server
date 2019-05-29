@@ -183,7 +183,16 @@ class UserSetStusApi(Resource):
         print('------ get state status ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
-        user.find=False
+        # user.find=False
+        # user.save()
+        # print (user.first_name)
+        return [user.find]
+    def post (self,user_id):
+        print('------ post state status ------')
+        payload = request.json.get('body')
+        find =payload.get('find')
+        user=User.objects.get(id=user_id)
+        user.find=find
         user.save()
         # print (user.first_name)
         return [user.find]
