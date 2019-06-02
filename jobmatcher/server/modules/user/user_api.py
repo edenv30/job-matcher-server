@@ -13,7 +13,6 @@ from jobmatcher.server.utils.dict_lang_programing import recommendation
 from jobmatcher.server.utils.location.location import matchHandler
 from jobmatcher.server.utils.SOS import pdfFIle
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
-from jobmatcher.server.modules.user.user_api_utils import findMatchWord2vec
 import operator, datetime
 
 
@@ -94,6 +93,11 @@ class UserUploadApi(Resource):
 
     @require_authentication
     def get(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         user = User.objects.get(pk=user_id)
         cv_length = len(user.cvs)
         if user.cvs == []:
@@ -136,19 +140,17 @@ class UserUploadApi(Resource):
             # user.cvs.append(cv.to_dbref())
             # user.save()
 
-
-
-
-
-
-
-
         except AssertionError:
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
 class UserUpdateApi(Resource):
 
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ post update profile ------')
         payload = request.json.get('body')
         # print(payload)
@@ -170,7 +172,12 @@ class UserUpdateApi(Resource):
         ppost.save()
 
     def get (self,user_id):
-        # print('------ get update profile ------')
+        # try:
+        #     # check that the given user_id matches the logged in user id
+        #     assert user_id == session['user']['id']
+        # except AssertionError:
+        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+        print('------ get update profile ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
         # print (user.first_name)
@@ -180,6 +187,11 @@ class UserUpdateApi(Resource):
 
 class UserSetStusApi(Resource):
     def get (self,user_id):
+        # try:
+        #     # check that the given user_id matches the logged in user id
+        #     assert user_id == session['user']['id']
+        # except AssertionError:
+        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ get state status ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
@@ -188,6 +200,11 @@ class UserSetStusApi(Resource):
         # print (user.first_name)
         return [user.find]
     def post (self,user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ post state status ------')
         payload = request.json.get('body')
         find =payload.get('find')
@@ -200,8 +217,11 @@ class UserSetStusApi(Resource):
 class UserPreferencesApi(Resource):
     @require_authentication
     def post(self, user_id):
-        # TODO: adding assert, adding try&except,user will be able to load only 1 CV file
-        # TODO: taking care if user want to delete his current cv file, change method to PUT(instead of POST)
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print("UserPreferencesApi")
         print(user_id)
         payload = request.json.get('body')
@@ -213,13 +233,24 @@ class UserPreferencesApi(Resource):
         user.job_type = kind
         print(user.job_type)
         user.save()
+
     def get(self,user_id):
+        # try:
+        #     # check that the given user_id matches the logged in user id
+        #     assert user_id == session['user']['id']
+        # except AssertionError:
+        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         user = User.objects.get(pk=user_id)
         return [user.job_type]
 
 class UserFindMatchApi(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         # print(" === UserFindMatchApi ===")
         # print("user_id: " + user_id)
 
@@ -228,7 +259,6 @@ class UserFindMatchApi(Resource):
 
         user_location = []
         user_location = extract_location(resume)
-        # TODO: change
         job = Job.objects.first()  # getting job id for the first object - temp for now
         job_id = job.id
         matchHandler(job_id, user_location)
@@ -236,8 +266,12 @@ class UserFindMatchApi(Resource):
 class UserFindMatchWord2vecApi(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
-        # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
         user = User.objects.get(pk=user_id)
         if len(user.cvs) == 0:
             # print('len(user.cvs)')
@@ -260,7 +294,7 @@ class UserFindMatchWord2vecApi(Resource):
         return response
 
 
-        # # # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+
         # response={}
         # jobs = user.jobs
         #
@@ -274,8 +308,14 @@ class UserFindMatchWord2vecApi(Resource):
 class UserFindMatchWord2vecApi2(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+
         print('~~~~~ UserFindMatchWord2vecApi ~~~~~')
-        # TODO: בשלב הסופי כשהכל תקין - להחזיר את ההערות ולמחוק את הפרטים הסטטיים
+
         user = User.objects.get(pk=user_id)
         if len(user.cvs) == 0:
             # print('len(user.cvs)')
@@ -298,7 +338,7 @@ class UserFindMatchWord2vecApi2(Resource):
         # return response
 
 
-        # # # #TODO: לקטע קוד האמיתי זה ההערות הראשונות
+
         response={}
         jobs = user.jobs
 
@@ -312,6 +352,11 @@ class UserFindMatchWord2vecApi2(Resource):
 class UserGetRecommendation(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print("UserGetRecommendation")
         # rec = []
         rec = recommendation(user_id)
@@ -323,6 +368,11 @@ class UserGetRecommendation(Resource):
 class jobsSortBYscore(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('~~~~~ jobsSortBYscore ~~~~~')
         user = User.objects.get(pk=user_id)
         if len(user.cvs)==0:
@@ -433,13 +483,14 @@ class UserTimeLine(Resource):
         user = User.objects.get(id=user_id)
         response = {}
         dates ={}
+        if len(user.jobs)==0:
+            return None
         #  keep in dictionary key by date from sending dictionary
         for job in user.sendingDate:
             d = user.sendingDate[job].strftime("%d/%m/%Y")
             dic = {}
             if d not in dates:
                 dates[d] = []
-            # TODO: לעשות בדיקה אם אין משרות , תנאי
             j = Job.objects.get(identifier=job)
             dic[job]=j.role_name, 'SENT: CVs were sent to the employer'
             dates[d].append(dic)
