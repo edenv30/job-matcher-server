@@ -144,11 +144,11 @@ class UserUploadApi(Resource):
 class UserUpdateApi(Resource):
 
     def post(self, user_id):
-        try:
-            # check that the given user_id matches the logged in user id
-            assert user_id == session['user']['id']
-        except AssertionError:
-            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+        # try:
+        #     # check that the given user_id matches the logged in user id
+        #     assert user_id == session['user']['id']
+        # except AssertionError:
+        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ post update profile ------')
         payload = request.json.get('body')
         # print(payload)
@@ -506,8 +506,6 @@ class UserTimeLine(Resource):
         user = User.objects.get(id=user_id)
         response = {}
         dates ={}
-        if len(user.jobs)==0:
-            return None
         #  keep in dictionary key by date from sending dictionary
         for job in user.sendingDate:
             d = user.sendingDate[job].strftime("%d/%m/%Y")
