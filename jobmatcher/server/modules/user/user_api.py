@@ -179,11 +179,12 @@ class UserUpdateApi(Resource):
         return [user.first_name,user.last_name,user.email,len(user.tags),user.tags,user.password_hash]
 
 class UserSetStusApi(Resource):
-    def get (self,user_id):
+    @require_authentication
+    def get (self, user_id):
         print('------ get state status ------')
         # print(user_id)
-        user=User.objects.get(id=user_id)
-        user.find=False
+        user = User.objects.get(id=user_id)
+        user.find = False
         user.save()
         # print (user.first_name)
         return [user.find]
@@ -497,10 +498,13 @@ class RegistersUserCounter(Resource):
 class UsersFindJobCounter(Resource):
     def get(self):
         print('~~~~~ In func GET in UsersFindJobCounter ~~~~~')
-        counter=0
+
+        counter = 0
         for i in User.objects():
             if i.find:
-                counter=counter+1
+                print("i.find!!! ---> user.email", i.email)
+                counter = counter + 1
+        print("counter = ", counter)
         return counter
 
 
