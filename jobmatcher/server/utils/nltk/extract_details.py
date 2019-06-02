@@ -136,7 +136,7 @@ def extract_education(resume_text):
                 else:
                     edu[tex] = text + nlp_text[index]
 
-    # TODO: to check for job maybe to delete only for job !!! - eden!
+    # :was TO DO to check for job maybe to delete only for job !!! - eden!
     # Extract year
     education = []
     for key in edu.keys():

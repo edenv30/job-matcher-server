@@ -16,7 +16,6 @@ from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_mat
 from jobmatcher.server.modules.user.user_api_utils import findMatchWord2vec
 import operator, datetime
 
-
 class RegisterUserApi(Resource):
     def post(self):
         payload = request.json.get('body')
@@ -72,7 +71,6 @@ class UserUploadApi(Resource):
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
         payload = request.json
-
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
         ##############
@@ -135,14 +133,6 @@ class UserUploadApi(Resource):
 
             # user.cvs.append(cv.to_dbref())
             # user.save()
-
-
-
-
-
-
-
-
         except AssertionError:
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
@@ -349,6 +339,11 @@ class jobsSortBYscore(Resource):
 class jobsSortBYlocation(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('~~~~~ jobsSortBYlocation ~~~~~')
         user = User.objects.get(pk=user_id)
         if len(user.cvs)==0:
@@ -384,6 +379,11 @@ class jobsSortBYlocation(Resource):
 class UpdateFavorite(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ post test ------')
         payload = request.json.get('body')
         job_id=payload.get('id')
@@ -397,6 +397,11 @@ class UpdateFavorite(Resource):
 class UpdateSending(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ post test ------')
         payload = request.json.get('body')
         job_id=payload.get('id')
@@ -414,6 +419,11 @@ class UpdateSending(Resource):
 class UpdateReply(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         payload = request.json.get('body')
         job_id = payload.get('id')
         user = User.objects.get(id=user_id)
@@ -429,6 +439,11 @@ class UpdateReply(Resource):
 class UserTimeLine(Resource):
     @require_authentication
     def post(self, user_id):
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('~~~~~ UserTimeLine ~~~~~')
         user = User.objects.get(id=user_id)
         response = {}
@@ -464,39 +479,41 @@ class UserTimeLine(Resource):
         return response
 
 class PDFfile(Resource):
+    @require_authentication
     def post(self,user_id):
-        # print('------PDFfile----')
-        payload = request.json.get('body')
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+            # print('------PDFfile----')
+            payload = request.json.get('body')
 
-        # print("payload - selectedFilter: ", payload['selectedFilter'])
-        user = User.objects.get(id=user_id)
+            # print("payload - selectedFilter: ", payload['selectedFilter'])
+            user = User.objects.get(id=user_id)
 
-        filter_dict = {
-            "0": "showAll",
-            "1": "full",
-            "2": "Half",
-            "3": "student",
-            "4": "sending",
-            "5": "favorite",
-            "6": "reply"
+            filter_dict = {
+                "0": "showAll",
+                "1": "full",
+                "2": "Half",
+                "3": "student",
+                "4": "sending",
+                "5": "favorite",
+                "6": "reply"
+            }
 
-        }
+            choice = str(payload['selectedFilter'])
+            result = filter_dict[choice]
 
-        choice = str(payload['selectedFilter'])
-        result = filter_dict[choice]
+            # url=payload.get('urlFile')
+            # receiver = user.email
+            # print("receiver: " + receiver)
 
+            # subject= 'This is the subject'
+            # message='This is the message'
+            # print(url)
 
-
-
-        # url=payload.get('urlFile')
-        # receiver = user.email
-        # print("receiver: " + receiver)
-
-        # subject= 'This is the subject'
-        # message='This is the message'
-        # print(url)
-
-        pdfFIle.send_user_mail(user, result)
+            pdfFIle.send_user_mail(user, result)
 
 class RegistersUserCounter(Resource):
     def get(self):
@@ -511,5 +528,3 @@ class UsersFindJobCounter(Resource):
             if i.find:
                 counter=counter+1
         return counter
-
-
