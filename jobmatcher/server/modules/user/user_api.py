@@ -507,7 +507,11 @@ class UserTimeLine(Resource):
         response = {}
         dates ={}
         if len(user.jobs)==0:
-            return None
+            # print('noJobs')
+            return 'noJobs'
+        if (len(user.sendingDate)==0 and len(user.replyDate)==0):
+            # print('NoSendingReplyDate')
+            return 'NoSendingReplyDate'
         #  keep in dictionary key by date from sending dictionary
         for job in user.sendingDate:
             d = user.sendingDate[job].strftime("%d/%m/%Y")
