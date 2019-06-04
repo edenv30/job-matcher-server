@@ -1,10 +1,9 @@
 import time
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from flask_restful import Api
 from flask_mail import Mail
-
 
 from jobmatcher.server.db import db
 from jobmatcher.server.modules.user.User import User
@@ -82,6 +81,7 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(scrape_schedule, trigger='interval', hours=1)
 scheduler.start()
 
+
 if __name__ == '__main__':
     start_message = 'Job Matcher Server is Running'
     print('@@@@@@@@@@@@@@@@@@@@@@@@')
@@ -91,5 +91,6 @@ if __name__ == '__main__':
     # pdfFIle.convertHtmlToDfdFile('http://localhost:3000/user/5caef73ff0dbb33148fe9c7e#svemtchjbs',
     #                              'chenyair1617@gmail.com','This is the subject',
     #                              'This is the message')
+    # scrapUrl.scarpUrl()
 
     app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
