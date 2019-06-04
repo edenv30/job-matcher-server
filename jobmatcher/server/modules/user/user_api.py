@@ -184,12 +184,13 @@ class UserUpdateApi(Resource):
         return [user.first_name,user.last_name,user.email,len(user.tags),user.tags,user.password_hash]
 
 class UserSetStusApi(Resource):
+    @require_authentication
     def get (self,user_id):
-        # try:
-        #     # check that the given user_id matches the logged in user id
-        #     assert user_id == session['user']['id']
-        # except AssertionError:
-        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         print('------ get state status ------')
         # print(user_id)
         user=User.objects.get(id=user_id)
@@ -197,9 +198,12 @@ class UserSetStusApi(Resource):
         # user.save()
         # print (user.first_name)
         return [user.find]
+
+    @require_authentication
     def post (self,user_id):
         try:
             # check that the given user_id matches the logged in user id
+            # print(session.items())
             assert user_id == session['user']['id']
         except AssertionError:
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
@@ -232,12 +236,13 @@ class UserPreferencesApi(Resource):
         print(user.job_type)
         user.save()
 
+    @require_authentication
     def get(self,user_id):
-        # try:
-        #     # check that the given user_id matches the logged in user id
-        #     assert user_id == session['user']['id']
-        # except AssertionError:
-        #     return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
+        try:
+            # check that the given user_id matches the logged in user id
+            assert user_id == session['user']['id']
+        except AssertionError:
+            return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
         user = User.objects.get(pk=user_id)
         return [user.job_type]
 
@@ -506,6 +511,12 @@ class UserTimeLine(Resource):
         user = User.objects.get(id=user_id)
         response = {}
         dates ={}
+        if len(user.jobs)==0:
+            # print('noJobs')
+            return 'noJobs'
+        if (len(user.sendingDate)==0 and len(user.replyDate)==0):
+            # print('NoSendingReplyDate')
+            return 'NoSendingReplyDate'
         #  keep in dictionary key by date from sending dictionary
         for job in user.sendingDate:
             d = user.sendingDate[job].strftime("%d/%m/%Y")
