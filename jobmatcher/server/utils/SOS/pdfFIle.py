@@ -154,33 +154,30 @@ def html_favorite(user):
     favorite = Job.objects.filter(identifier__in=keys)
 
     html = """
-                <html>
-                    <head>
-                        <meta http-equiv="content-type" content="text/html"; charset="utf-8">
-                    </head>
-                    <body>
-                        <div class="logo">
-                            <h1 class="logo-title">Job Matcher</h1>
-                            <h2 class="type-title">Favorite jobs matches</h2>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="content">
-                            <div class="user-info">%s</div>
-                            <div class="user-matches">%s</div>
-                        </div>
-                    </body>
-                </html>
-            """ % (makeUserInfoHtml(user), ''.join([makeJobHtml(job) for job in favorite]))
+                    <html>
+                        <head>
+                            <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+                        </head>
+                        <body>
+                            <div class="logo">
+                                <h1 class="logo-title">Job Matcher</h1>
+                                <h2 class="type-title">Favorite jobs matches</h2>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="content">
+                                <div class="user-info">%s</div>
+                                <div class="user-matches">%s</div>
+                            </div>
+                        </body>
+                    </html>
+                """ % (makeUserInfoHtml(user), ''.join([makeJobHtml(job) for job in favorite]))
 
     return html
 
 
 # TODO: add to func - try&catch later
 def send_user_mail(user, selected_filter):
-    print("####### mail_test() #####")
-    print(selected_filter)
-
     if selected_filter == 'showAll':
         current_html = html_jobs(user)
     elif selected_filter == 'favorite':
@@ -227,30 +224,5 @@ def send_user_mail(user, selected_filter):
     os.remove("temp.pdf")
 
 
-# def convertHtmlToDfdFile(urlFile,receiver,subject,message):
-#     print(" ****** convertHtmlToDfdFile ******")
-#     msg = MIMEMultipart()
-#     msg['From'] = config.MAIL_SENDER
-#     msg['To'] = receiver
-#     msg['Subject'] = subject
-#     msg.attach(MIMEText(message, 'plain'))
-#
-#     # Setup the attachment
-#     filename = subject+".pdf"
-#     attachment = pdfkit.from_url(urlFile, False)
-#     part = MIMEBase('application', 'octet-stream')
-#     part.set_payload(attachment)
-#     encoders.encode_base64(part)
-#     part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-#
-#     # Attach the attachment to the MIMEMultipart object
-#     msg.attach(part)
-#
-#
-#     server = smtplib.SMTP_SSL(config.MAIL_SERVER,config.MAIL_PORT)
-#     # server.starttls()
-#     server.login(config.MAIL_SENDER, config.MAIL_PASSWORD)
-#     text = msg.as_string()  # You now need to convert the MIMEMultipart object to a string to send
-#     server.sendmail(config.MAIL_SENDER, receiver, text)
-#     server.quit()
+
 
