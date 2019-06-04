@@ -1,6 +1,15 @@
 from flask_restful import Resource
 from flask import request, session
 from mongoengine import NotUniqueError
+import smtplib, ssl
+import os
+import pdfkit
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+
+from jobmatcher.config import config
 from jobmatcher.server.authentication.authentication import require_authentication
 from jobmatcher.server.authentication.web_token import generate_access_token
 from jobmatcher.server.utils import utils as u
@@ -13,7 +22,9 @@ from jobmatcher.server.utils.dict_lang_programing import recommendation
 from jobmatcher.server.utils.location.location import matchHandler
 from jobmatcher.server.utils.SOS import pdfFIle
 from jobmatcher.server.utils.word2vec.matching import match_jobs2cv,get_list_matching_job
+from jobmatcher.server.modules.user.user_api_utils import findMatchWord2vec
 import operator, datetime
+
 
 class RegisterUserApi(Resource):
     def post(self):
@@ -70,6 +81,7 @@ class UserUploadApi(Resource):
             return {'errors': ['You are Unauthorized in this EP']}, u.HTTP_UNAUTHORIZED
 
         payload = request.json
+
         # get the user instance from the users collection
         user = User.objects.get(pk=user_id)
         ##############
@@ -596,3 +608,59 @@ class UsersFindJobCounter(Resource):
             if i.find:
                 counter=counter+1
         return counter
+
+
+class UserContact(Resource):
+    def post(self):
+        payload = request.json
+        name = payload.get('user_name')
+        mail = payload.get('user_mail')
+        message = payload.get('user_msg')
+
+        fromaddr = config.MAIL_SENDER
+        toaddr = config.MAIL_SENDER
+        msg = MIMEMultipart()
+        msg['To'] = toaddr
+        msg['Subject'] = "User Contact - message"
+        msg['From'] = fromaddr
+        body = 'User Contact'
+        msg.attach(MIMEText(body, 'plain'))
+        output_filename = 'contact.pdf'
+        options = {'quiet': ''}
+
+        html = """
+                    <html>
+                        <head>
+                            <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+                        </head>
+                        <body>
+                            <div class="message">
+                                <h3>User Name: %s</h3>
+                                <h3>User Mail: %s</h3>
+                                <p>User Message: %s</p>
+                            </div>
+                        </body>
+                    </html>
+                """ % (name, mail, message)
+
+        pdfkit.from_string(html, output_filename, css=['%s/utils/SOS/pdfContactStyle.css' % os.getcwd()],
+                           options=options)
+        filename = "contact.pdf"
+        attachment = open('contact.pdf', "rb")
+        p = MIMEBase('application', 'octet-stream')
+        p.set_payload(attachment.read())
+        encoders.encode_base64(p)
+        p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+        msg.attach(p)
+
+
+        server = smtplib.SMTP_SSL(config.MAIL_SERVER, config.MAIL_PORT)
+        server.login(config.MAIL_SENDER, config.MAIL_PASSWORD)
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+        attachment.close()
+        os.remove("contact.pdf")
+
+

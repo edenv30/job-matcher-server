@@ -55,5 +55,5 @@ ient[config.DB_NAME]
 
 class jobsCounter(Resource):
     def get(self):
-        print('~~~~~ In func GET in jobsCounter ~~~~~')
+        # print('~~~~~ In func GET in jobsCounter ~~~~~')
         return len(Job.objects)
